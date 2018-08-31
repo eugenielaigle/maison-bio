@@ -1,0 +1,30 @@
+{
+  "name": "maison-biologique",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eugenielaigle/maison-bio.git"
+  },
+  "author": "Eugénie Laigle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eugenielaigle/maison-bio/issues"
+  },
+  "homepage": "https://github.com/eugenielaigle/maison-bio#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^4.0.1",
+    "gulp-uglify": "^3.0.0",
+    "install": "^0.11.0",
+    "pump": "^3.0.0",
+    "sass-module-importer": "^1.4.0"
+  }
+}
