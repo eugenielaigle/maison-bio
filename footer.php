@@ -11,23 +11,74 @@
 
 ?>
 
-	</div><!-- #content -->
+</div><!-- #content -->
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'maison-biologique' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'maison-biologique' ), 'WordPress' );
-				?>
+
+<?php if ( is_front_page() && is_home() ) :?>
+<footer id="colophon" class="home-footer">
+
+
+	<div class="partie-evenements">
+		<h4>EVENEMENTS</h4>
+		<p class="chapeau">Retrouvez l'ensemble des évènements à venir</p>
+		<a class="voir-calendrier" href="">
+			<p class="reserver">VOIR LE CALENDRIER</p>
+			<img class="fleche" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/fleche.svg" alt="Voir le Calendrier">
+		</a>
+	</div>
+
+
+
+
+	<div class="footer-home">
+		<h3 class="maison-bio">MAISON BIOLOGIQUE</h3>
+		<?php
+		wp_nav_menu( array(
+			'theme_location' => 'menu-Footer',
+			'menu_id'        => 'footer-menu',
+		) );
+		?>
+		<div class="biocoop-footer">
+			<p>Sociétaire de BIOCOOP SA depuis 2016</p>
+			<img class="biocoop" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/logo-biocoop.png" alt="Biocoop">
+		</div>
+	</div>
+</footer><!-- #colophon -->
+
+
+
+
+
+<?php else:?>
+
+	<footer id="colophon" class="article-footer">
+		<div class="partie-evenements">
+			<h4>EVENEMENTS</h4>
+			<p class="chapeau">Retrouvez l'ensemble des évènements à venir</p>
+			<a class="voir-calendrier" href="">
+				<p class="reserver">VOIR LE CALENDRIER</p>
+				<img class="fleche" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/fleche.svg" alt="Voir le Calendrier">
 			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'maison-biologique' ), 'maison-biologique', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
-		</div><!-- .site-info -->
+		</div>
+
+		<div class="footer-home">
+			<h3 class="maison-bio">MAISON BIOLOGIQUE</h3>
+			<?php
+			wp_nav_menu( array(
+				'theme_location' => 'menu-Footer',
+				'menu_id'        => 'footer-menu',
+			) );
+			?>
+			<div class="biocoop-footer">
+				<p>Sociétaire de BIOCOOP SA depuis 2016</p>
+				<img class="biocoop" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/logo-biocoop.png" alt="Biocoop">
+			</div>
+		</div>
 	</footer><!-- #colophon -->
+<?php endif; ?>
+
+
+
 </div><!-- #page -->
 
 <?php wp_footer(); ?>

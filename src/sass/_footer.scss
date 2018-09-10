@@ -1,0 +1,104 @@
+
+
+/*********************************FOOTER*******************************************/
+
+.home-footer{
+  width: 80%;
+  padding: 0 30px;
+}
+
+.article-footer{
+  width: 100%;
+  padding: 0 30px;
+}
+
+.partie-evenements{
+  border-top: 0.5px solid $line;
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  h4{
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  .chapeau{
+    font-style: italic;
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+  .voir-calendrier{
+    display: flex;
+  }
+}
+
+.footer-home{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 0.5px solid $line;
+  height: 50px;
+  .maison-bio{
+    font-family: 'Caslon 540';
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: 1.43px;
+  }
+
+  .menu-menu-footer-container{
+    width: 50%;
+  }
+  #footer-menu{
+    display: flex;
+    // justify-content: space-around;
+    align-items: center;
+    li{
+      font-size: 12px;
+      margin: 0 3%;
+    }
+  }
+  .biocoop-footer{
+    display: flex;
+    align-items: center;
+    p{
+      font-style: italic;
+      font-size: 8px;
+      margin-right: 10px;
+    }
+  }
+}
+
+@media (max-width: 768px){
+  .home-footer{
+    width: 100%;
+  }
+  .partie-evenements{
+    display: none;
+  }
+  .footer-home{
+    justify-content: center;
+    padding: 75px 0;
+    .menu-menu-footer-container, .maison-bio{
+      display: none;
+    }
+    .biocoop-footer{
+      flex-direction: column;
+      p{
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+      img{
+        height: 35px;
+      }
+    }
+  }
+}
+
+
+
+
+
+

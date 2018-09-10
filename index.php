@@ -15,45 +15,83 @@
 get_header();
 ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main">
-
+<div id="primary" class="content-area">
+	<main id="main" class="site-main home-main">
 		<?php
+
+		$args = array(
+			'post_type'             => 'post',
+			'post_status'           => 'publish',
+			'posts_per_page' 				=> '-1'
+		);
+
+		$results_query = new WP_Query($args);
+
+		$count = 1;
 		if ( have_posts() ) :
+			if ( is_home() && is_front_page() ) :
+				while ($results_query->have_posts()) : $results_query->the_post();
+					if($count == 11) :
+						$count = 1;
+					endif;
+					if($count == 1 || $count == 6) :
+						$seq = $count == 1 ? "1" : "2";
+						?>
+						<div class="home-articles-<?php echo $count;?> home-articles sequence-<?php echo $seq; ?>">
+							<?php
+						endif;
 
-			if ( is_home() && ! is_front_page() ) :
-				?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
-				<?php
-			endif;
+						if($count == 1 || $count == 10) : ?>
+							<div class="a-la-une">
+								<?php
+						elseif ($count == 2 || $count == 6) : ?>
+								<div class="quatre-articles">
+									<?php
+									endif;
+									get_template_part( 'template-parts/content', get_post_type() );
+									if($count == 1 || $count == 10) : ?>
+									</div>
+									<?php
+						elseif ($count == 5 || $count == 9) : ?>
+									</div>
+									<?php
+								endif;
 
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+					if($count == 5 || $count == 10) : ?>
+								</div>
+								<?php
+							endif;
+							$count++;
+						endwhile;?>
+
+						<?php
+					else:
+						/* Start the Loop */
+						while ( have_posts() ) :
+							the_post();
 
 				/*
 				 * Include the Post-Type-specific template for the content.
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
 				 */
+
 				get_template_part( 'template-parts/content', get_post_type() );
 
 			endwhile;
 
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
 		endif;
-		?>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+	else :
+
+		get_template_part( 'template-parts/content', 'none' );
+
+	endif;
+	?>
+
+</main><!-- #main -->
+</div><!-- #primary -->
 
 <?php
-get_sidebar();
+// get_sidebar();
 get_footer();

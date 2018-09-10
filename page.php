@@ -14,27 +14,25 @@
 
 get_header();
 ?>
-
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 
+<?php if(is_page('a-propos')): ?>
 		<?php
 		while ( have_posts() ) :
 			the_post();
 
-			get_template_part( 'template-parts/content', 'page' );
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
+			get_template_part( 'template-parts/a-propos', 'page' );
 
 		endwhile; // End of the loop.
 		?>
 
+<?php else: ?>
+
+<?php endif; ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
 <?php
-get_sidebar();
+// get_sidebar();
 get_footer();

@@ -1,0 +1,294 @@
+
+
+/******************************** 1/2 BANDEAU DE DROITE *****************************/
+
+.bandeau-droite{
+  background-color: $beige;
+  height: 100%;
+  .event-bloc{
+    height: calc(100% / 3);
+    width: 70%;
+    margin: 0 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: 0.5px solid $line;
+    .link-title{
+      text-align: center;
+      h4{
+        text-transform: uppercase;
+        line-height: 20px;
+        font-size: 16px;
+        span{
+          text-transform: lowercase;
+          font-style: italic;
+        }
+      }
+      h5{
+        text-transform: uppercase;
+        line-height: 25px;
+        font-size: 12px;
+      }
+      h6{
+        font-style: italic;
+        line-height: 25px;
+        font-size: 12px;
+      }
+    }
+    .reservation{
+      display: flex;
+      margin-top: 10px;
+
+    }
+
+  }
+}
+
+
+.reserver{
+  display: none;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 5px;
+  margin-top: 1px;
+}
+.fleche{
+  height: 12px;
+}
+
+// Bandeau de droite end
+
+
+
+
+/******************************* 2/2 ARTICLES SUR LA HOME ******************************/
+.home-main{
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+
+.home-articles img:hover{
+  opacity: 0.9;
+  transition: opacity 0.4s ease-in-out;
+}
+
+@media (min-width: 769px){
+  .home-articles{
+    width: calc(80% - 15px);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 15px 0;
+    .post{
+      margin: 0;
+      .entry-header{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        .infos-article{
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+      }
+      .entry-title{
+        text-transform: none;
+      }
+      .entry-category a{
+        text-transform: uppercase;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.9px;
+      }
+      .entry-date, .article-date{
+        font-size: 11px;
+        font-style: italic;
+      }
+      .entry-excerpt, .entry-excerpt-une{
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 23px;
+        font-family: "Caslon 540";
+      }
+    }
+
+
+    .a-la-une{
+      width: 45%;
+      .post{
+        height: 100%;
+        display: flex;
+        align-items: stretch;
+
+        .bloc-title{
+          margin-top: 35px;
+          margin-bottom: 40px;
+        }
+
+      }
+
+      .entry-title{
+        font-size: 50px;
+        font-weight: 400;
+        line-height: 50px;
+        text-align: center;
+        margin-top: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      .entry-date{
+        margin-top: 20px;
+      }
+      .entry-category{
+        margin-top: 20px;
+      }
+      .entry-excerpt-une{
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-bottom: 30px;
+        font-family: "Caslon 540";
+      }
+      .entry-excerpt{
+        display: none;
+      }
+      .entry-category, .entry-excerpt-une, .entry-date{
+        text-align: center;
+      }
+      .article-date{
+        display: none;
+      }
+      hr{
+        margin-right: 15px;
+        margin-left: 15px;
+      }
+
+    }
+
+    .quatre-articles{
+      width: 55%;
+      display: flex;
+      flex-wrap: wrap;
+      .post{
+        width: calc(100% / 2);
+        .entry-title{
+          font-size: 26px;
+          font-weight: 400;
+          line-height: 28px;
+          margin-top: 15px;
+          margin-bottom: 15px;
+          text-align: left;
+        }
+        .entry-excerpt{
+          text-align: justify;
+        }
+        .entry-excerpt-une{
+          display: none;
+        }
+        .entry-date{
+          display: none;
+        }
+        .category-date{
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 15px;
+        }
+        hr{
+          display: none;
+        }
+      }
+      .post:nth-child(1), .post:nth-child(4){
+        .entry-thumbnail{ /*container*/
+          width: 100%;
+          height: 0;
+          padding-top: 100%;
+          position: relative;
+          overflow: hidden;
+          margin-bottom: 5px;
+    img{/*image dans le container*/
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+}
+.post:nth-child(3), .post:nth-child(4){
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 20px;
+  margin-top: -20%;
+}
+
+}
+
+}
+
+.sequence-1{
+  .a-la-une{
+    padding-right: 20px;
+  }
+  .quatre-articles{
+    .post:nth-child(1), .post:nth-child(3){
+      padding-right: 10px;
+    }
+    .post:nth-child(2), .post:nth-child(4){
+      padding-left: 10px;
+    }
+  }
+}
+
+.sequence-2{
+  .a-la-une{
+    padding-left: 20px;
+  }
+  .quatre-articles{
+    .post:nth-child(1), .post:nth-child(3){
+      padding-right: 10px;
+    }
+    .post:nth-child(2), .post:nth-child(4){
+      padding-left: 10px;
+    }
+  }
+}
+}
+
+
+
+@media (max-width: 768px){
+  .home-articles{
+    .category-date{
+      margin-top: 30px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      text-align: center;
+      .article-date{
+        display: none;
+      }
+    }
+    .entry-title{
+      text-transform: none;
+      margin: 0;
+    }
+    .entry-date, .entry-excerpt, hr{
+      display: none;
+    }
+    .entry-excerpt-une{
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+      font-family: "Caslon 540";
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 23px;
+    }
+  }
+}

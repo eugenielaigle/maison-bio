@@ -7,6 +7,11 @@
  * @package Maison_Biologique
  */
 
+function my_function_admin_bar(){
+    return false;
+}
+add_filter( 'show_admin_bar' , 'my_function_admin_bar');
+
 if ( ! function_exists( 'maison_biologique_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -45,6 +50,7 @@ if ( ! function_exists( 'maison_biologique_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'menu-1' => esc_html__( 'Primary', 'maison-biologique' ),
+			'menu-Footer' => esc_html__( 'Footer', 'maison-biologique' ),
 		) );
 
 		/*
@@ -116,6 +122,9 @@ function maison_biologique_widgets_init() {
 }
 add_action( 'widgets_init', 'maison_biologique_widgets_init' );
 
+
+
+
 /**
  * Enqueue scripts and styles.
  */
@@ -126,6 +135,8 @@ function maison_biologique_scripts() {
   wp_register_style('scss-style', get_template_directory_uri().'/assets/css/style.min.css', array());
   wp_enqueue_style('scss-style');
 
+	wp_enqueue_script( 'basics', get_template_directory_uri() . '/assets/js/basics.js', array(), '20180904', true );
+
 	wp_enqueue_script( 'maison-biologique-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), '20151215', true );
 
 	wp_enqueue_script( 'maison-biologique-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20151215', true );
@@ -135,7 +146,6 @@ function maison_biologique_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'maison_biologique_scripts' );
-
 
 
 
@@ -169,4 +179,80 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 
+// CUSTOM POST TYPE
 
+function cptui_register_my_cpts() {
+
+	/**
+	 * Post Type: evenements.
+	 */
+
+	$labels = array(
+		"name" => __( "evenements", "maison-biologique" ),
+		"singular_name" => __( "evenement", "maison-biologique" ),
+		"menu_name" => __( "Evènements", "maison-biologique" ),
+		"all_items" => __( "Tous les évènements", "maison-biologique" ),
+		"add_new" => __( "Ajouter", "maison-biologique" ),
+		"add_new_item" => __( "Ajouter nouvel évènement", "maison-biologique" ),
+		"edit_item" => __( "Modifier un évènement", "maison-biologique" ),
+		"new_item" => __( "Nouvel évènement", "maison-biologique" ),
+		"view_item" => __( "Voir un évènement", "maison-biologique" ),
+		"view_items" => __( "Voir tous les évènements", "maison-biologique" ),
+		"search_items" => __( "Rechercher un évènement", "maison-biologique" ),
+		"not_found" => __( "Pas encore d'évènement créé", "maison-biologique" ),
+		"featured_image" => __( "Image à la une", "maison-biologique" ),
+		"set_featured_image" => __( "Régler l'image à la une", "maison-biologique" ),
+		"remove_featured_image" => __( "Supprimer l'image à la une", "maison-biologique" ),
+		"use_featured_image" => __( "Utiliser l'image à la une", "maison-biologique" ),
+		"archives" => __( "2vènements", "maison-biologique" ),
+		"items_list" => __( "Liste des évènements", "maison-biologique" ),
+		"attributes" => __( "Attributs", "maison-biologique" ),
+	);
+
+	$args = array(
+		"label" => __( "evenements", "maison-biologique" ),
+		"labels" => $labels,
+		"description" => "(Calendrier)",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => false,
+		"rest_base" => "",
+		"has_archive" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "evenements", "with_front" => true ),
+		"query_var" => true,
+		"menu_icon" => "http://localhost/maison-bio/wp-content/uploads/2018/08/calendar-icon-1.png",
+		"supports" => array( "title", "editor", "thumbnail", "custom-fields" ),
+		"taxonomies" => array( "post_tag" ),
+	);
+
+	register_post_type( "evenements", $args );
+}
+
+add_action( 'init', 'cptui_register_my_cpts' );
+
+/* Retirer les préfixes sur les pages d'archives */
+function wpc_remove_archive_title_prefix() {
+	if (is_category()) {
+			$title = single_cat_title('', false);
+		} elseif (is_tag()) {
+			$title = single_tag_title('', false);
+		} elseif (is_author()) {
+			$title = '<span class="vcard">' . get_the_author() . '</span>' ;
+		} elseif (is_post_type_archive()) {
+			 $title = post_type_archive_title('', false);
+		}
+	return $title;
+}
+add_filter('get_the_archive_title', 'wpc_remove_archive_title_prefix');
+
+
+function wpse_custom_excerpts($limit) {
+    return wp_trim_words(get_the_excerpt(), $limit, '&nbsp;&hellip;');
+}

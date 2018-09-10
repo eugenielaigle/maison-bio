@@ -1,0 +1,101 @@
+
+/********************** EVENEMENTS ***********************************/
+
+.page-header{
+  margin-bottom: 10vh;
+}
+
+.evenements{
+    margin-bottom: 0;
+  .entry-header{
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    padding: 50px;
+    border-top: 0.5px solid $line;
+    .container-thumbnail{
+      // padding: 50px;
+      // margin: 50px;
+    }
+    .event-thumbnail{
+      width: 100%;
+      height: 0;
+      padding-top: 100%;
+      position: relative;
+      overflow: hidden;
+      img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+    .infos-event{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: 50px;
+      .event-date{
+        text-transform: uppercase;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 29px;
+      }
+      h4{
+        font-size: 34px;
+        font-weight: 400;
+        line-height: 44px;
+        text-transform: uppercase;
+        span{
+          text-transform: lowercase;
+          font-style: italic;
+        }
+      }
+      .entry-date{
+        font-size: 16px;
+        font-style: italic;
+        line-height: 18px;
+      }
+      .event-excerpt{
+        font-size: 14px;
+        line-height: 23px;
+        width: 70%;
+        text-align: justify;
+      }
+    }
+    .reservation{
+      display: flex;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .fleche{
+      margin-left: 5px;
+    }
+  }
+}
+
+@media (max-width: 768px){
+  .entry-header{
+    display: flex!important;
+    flex-direction: column;
+    padding-left: 0!important;
+    padding-right: 0!important;
+  }
+  .infos-event{
+    margin: 50px 0 0 0!important;
+    .event-group{
+      text-align: center;
+    }
+    .event-excerpt{
+      width: 100%!important;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    .reservation{
+      justify-content: center;
+    }
+  }
+}
+
+

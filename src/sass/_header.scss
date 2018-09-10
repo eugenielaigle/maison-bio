@@ -1,0 +1,433 @@
+
+
+
+/************************************* GENERAL **************************************/
+// Survol des liens du menu - start
+
+.main-navigation{
+  // position: fixed;
+  background-color: $global;
+  top: 0;
+  .title-website {
+    h2{
+      font-family: 'Caslon';
+    // font-weight: 600;
+    font-size: 80px;
+    display: inline;
+    letter-spacing: 2px;
+    sup{
+      margin-left: -10px;
+      font-weight: normal;
+      font-size: 40px;
+      top: -32px;
+    }
+  }
+  h3{
+    font-family: 'Caslon 540';
+    font-size: 20px;
+    display: inline;
+    margin-left: 30px;
+    top: -10px;
+    position: relative;
+  }
+}
+.nav-menu{
+  .menu-item{
+    a{
+      img{
+        width: 14px;
+      }
+    }
+  }
+  .menu-item-object-category{
+    a{
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    a:hover{
+      text-decoration: underline;
+    }
+  }
+  .menu-item-object-page{
+    a:hover{
+      font-weight: bold;
+    }
+  }
+}
+}
+
+
+// Survol des liens du menu - end
+
+/************************************ MENU HEADER HOME ***************************************/
+
+.biocoop{
+  height: 25px;
+}
+
+
+
+
+
+
+/***************** MENU HOME SUR LAPTOP *****************/
+@media (min-width: 769px){
+  .main-navigation{
+    // height: 50px;
+    width: 80%;
+    padding: 0 15px;
+    .border-menu{
+      padding-top: 50px;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
+      border-bottom: 0.5px solid $line;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+    .top-menu{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    .nav-home-link{
+      display: flex;
+      align-items: flex-start;
+    }
+    .menu-right{
+      display: flex;
+      align-items: flex-end;
+      flex-direction: column;
+      width: 60%;
+      .phrase-intro{
+        width: 50%;
+        margin-bottom: 50px;
+        h3{
+          font-family: 'Caslon';
+          font-style: normal;
+          font-size: 12px;
+          text-align: right;
+          line-height: 18px;
+          margin-bottom: 10px;
+        }
+        img{
+          height: 28px;
+          float: right;
+          margin-right: 30px;
+        }
+      }
+
+    }
+    .menu-menu-home-principal-container{
+      width: 100%;
+    }
+    .nav-menu{
+      width: 70%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      float: right;
+    }
+  }
+  .bandeau-droite{
+    width: 20%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+}
+
+
+
+
+
+
+/******************** MENU HOME SUR MOBILE *********************/
+
+// Image du bouton menu sur mobile
+.menu-toggle img{
+  height: 14px;
+}
+
+@media (max-width: 768px){
+  .bandeau-droite{
+    display: none;
+  }
+  .main-navigation{
+    display: inline-block;
+    padding: 0 15px;
+    .border-menu{
+      padding-top: 50px;
+      padding-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
+      border-bottom: 0.5px solid $line;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+    .top-menu{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .nav-home-link{
+      float: left;
+      margin-bottom: 20px;
+      .title-website{
+        h2{
+          font-size: 57px!important;
+          sup{
+            margin-left: -10px;
+          }
+        }
+      }
+    }
+    .menu-toggle{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      outline: none;
+    }
+    .phrase-intro{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      h3{
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      img{
+        height: 25px;
+      }
+    }
+    .menu-menu-home-principal-container{
+      width: calc(100% + 60px);
+      z-index: 100;
+      position: relative;
+      top: 20px;
+    }
+    .nav-menu{
+      background-color: $global;
+      .menu-item{
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+      }
+    }
+  }
+  .menu-toggle, .main-navigation.toggled ul{
+    display: inline-block;
+  }
+}
+
+
+
+
+
+
+/************************************ MENU HEADER ARTICLE ***************************************/
+
+.site-branding .article-navigation{
+  // position: fixed;
+  background-color: $global;
+  top: 0;
+  .title-website {
+    h2{
+      font-family: 'Caslon';
+      font-size: 32px;
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      display: inline;
+      letter-spacing: 2px;
+      sup{
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0.35px;
+        top: 0;
+        margin-left: 0;
+      }
+      span{
+        font-size: 17px;
+        font-weight: 400;
+        letter-spacing: 1.27px;
+        text-transform: uppercase;
+        margin-left: 10px;
+        font-family: 'Caslon 540';
+      }
+    }
+
+  }
+
+  .nav-menu{
+    .menu-item{
+      a{
+        img{
+          width: 14px;
+        }
+      }
+    }
+    .menu-item-object-category{
+      a{
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      a:hover{
+        text-decoration: underline;
+      }
+    }
+    .menu-item-object-page{
+      a:hover{
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+/***************** MENU ARTICLE SUR LAPTOP *****************/
+
+@media (min-width: 769px){
+ .site-branding .article-navigation{
+    // position: fixed;
+    height: 50px;
+    width: 100%;
+    padding: 0 15px;
+    .border-menu{
+      padding-top: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      border-bottom: 0.5px solid $line;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+    .nav-home-link{
+      display: flex;
+      align-items: flex-start;
+      width: 30%;
+    }
+
+    .menu-menu-home-principal-container{
+      width: 100%;
+    }
+    .nav-menu{
+      width: 70%;
+      display: flex;
+      justify-content: space-between;
+      float: right;
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+
+
+
+
+/******************** MENU ARTICLE SUR MOBILE *********************/
+
+// Image du bouton menu sur mobile
+.menu-toggle img{
+  height: 14px;
+}
+
+@media (max-width: 768px){
+ .site-branding .article-navigation{
+  display: inline-block;
+  padding: 0;
+  .border-menu{
+    height: 50px;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 0.5px solid $line;
+    margin: 0;
+  }
+  .top-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav-home-link{
+    float: left;
+    margin-bottom: 0;
+    .title-website{
+      h2{
+        display: none;
+        sup{
+          margin-left: 0;
+          top: 0;
+        }
+      }
+      h3{
+        top: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+  .menu-toggle{
+    position: static;
+    width: auto;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+  }
+    // .phrase-intro{
+    //   display: flex;
+    //   flex-direction: column;
+    //   align-items: center;
+    //   h3{
+    //     text-align: center;
+    //     margin-bottom: 0;
+    //     top: 0;
+    //   }
+    //   img{
+    //     height: 25px;
+    //   }
+    // }
+    .menu-menu-home-principal-container{
+      width: 100%;
+      z-index: 1;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      right: 0;
+    }
+    .nav-menu{
+      background-color: $global;
+      .menu-item{
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+      }
+    }
+  }
+  .menu-toggle, .main-navigation.toggled ul{
+    display: inline-block;
+  }
+}
+
+
+
+
+
