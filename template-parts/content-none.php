@@ -10,9 +10,9 @@
 ?>
 
 <section class="no-results not-found">
-	<header class="page-header">
+	<!-- <header class="page-header">
 		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'maison-biologique' ); ?></h1>
-	</header><!-- .page-header -->
+	</header> --><!-- .page-header -->
 
 	<div class="page-content">
 		<?php
@@ -21,7 +21,7 @@
 			printf(
 				'<p>' . wp_kses(
 					/* translators: 1: link to WP admin new post page. */
-					__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'maison-biologique' ),
+					__( 'Prêt(e) à publier votre premier article? <a href="%1$s">Allons-y</a>.', 'maison-biologique' ),
 					array(
 						'a' => array(
 							'href' => array(),
@@ -34,16 +34,16 @@
 		elseif ( is_search() ) :
 			?>
 
-			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'maison-biologique' ); ?></p>
+			<p class="recherche-none"><?php esc_html_e( 'Il n\'y a pas de résultat pour votre recherche.', 'maison-biologique' ); ?></p>
 			<?php
-			get_search_form();
+
 
 		else :
 			?>
 
-			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'maison-biologique' ); ?></p>
+			<p class="recherche-none"><?php esc_html_e( 'Il n\'y a pas de résultat pour votre recherche.', 'maison-biologique' ); ?></p>
 			<?php
-			get_search_form();
+
 
 		endif;
 		?>

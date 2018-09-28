@@ -11,34 +11,43 @@ get_header();
 ?>
 
 	<section id="primary" class="content-area">
-		<main id="main" class="site-main">
+		<main id="main" class="site-main category-main">
 
 		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
-				<h1 class="page-title">
+			<header class="page-header category-header">
+				<h1 class="entry-title">
 					<?php
 					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'maison-biologique' ), '<span>' . get_search_query() . '</span>' );
+					printf( esc_html__( '%s', 'maison-biologique' ), '<span>' . get_search_query() . '</span>' );
 					?>
 				</h1>
 			</header><!-- .page-header -->
 
 			<?php
 			/* Start the Loop */
+			$count = 1;
+			/* Start the Loop */
 			while ( have_posts() ) :
 				the_post();
+				if($count == 11) :
+					$count = 1;
+				endif;
+				if($count == 1) :
+					?>
+					<div class="category-articles-<?php echo $count;?> category-articles sequence">
+						<?php
+					endif;
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
 				get_template_part( 'template-parts/content', 'search' );
 
-			endwhile;
+				if($count == 10) : ?>
+				</div>
+				<?php
+			endif;
+			$count++;
+		endwhile;
 
-			the_posts_navigation();
 
 		else :
 
@@ -51,5 +60,4 @@ get_header();
 	</section><!-- #primary -->
 
 <?php
-get_sidebar();
 get_footer();

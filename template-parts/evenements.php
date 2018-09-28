@@ -23,7 +23,7 @@
         <div class="infos-event">
           <div class="event-group">
           <div class="event-date">
-          <p class="article-date"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark"><?php  echo get_the_date('l j F');?></a></p>
+          <p class="article-date"><?php  echo get_the_date('l j F');?></p>
           </div >
           <?php
                 $event_title = get_field('titre_de_levenement');
@@ -33,10 +33,12 @@
                     <?php echo $event_title['titre_ligne_2']['lettres_en_majuscules']; ?>
                   </h4>
                 <?php endif; ?>
-          <p class="entry-date"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark"><?php the_field('lieu'); ?> / <?php the_field('horaires'); ?></a></p>
+          <p class="entry-date"><?php the_field('lieu'); ?> / <?php the_field('horaires'); ?></p>
           </div>
-          <div class="event-excerpt"><?php the_content(); ?></div>
-          <a class="reservation" href="">
+          <div class="event-excerpt"><?php the_content(); ?>
+            <p><strong>Tarif : <?php the_field('tarif'); ?></strong></p>
+          </div>
+          <a class="reservation" href="<?php the_permalink(); ?>">
                 <p class="resa">RÉSERVER</p>
                 <img class="fleche" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/fleche.svg" alt="Réserver">
               </a>
@@ -46,4 +48,5 @@
 
     </header><!-- .entry-header -->
   </article><!-- #post-<?php the_ID(); ?> -->
+
 

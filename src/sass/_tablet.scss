@@ -1,0 +1,54 @@
+
+
+// TABLET MENU
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait) {
+  .menu-menu-home-principal-container{
+    display: none;
+    background-color: $global;
+  }
+
+  .site-branding .article-navigation .menu-menu-home-principal-container{
+    top: -25px!important;
+    left: -15px;
+  }
+
+  .site-branding .article-navigation .border-menu{
+    padding: 0 15px;
+    justify-content: space-between!important;
+  }
+
+  .site-main{
+    margin: 15vh 15px 0!important;
+  }
+
+  .home .site-content{
+    margin-top: 20vh!important;
+  }
+
+  body .home .toggled .menu-toggle p{
+    right: -35px!important;
+  }
+}
+
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+
+  .main-navigation .nav-menu{
+    width: 90%!important;
+  }
+
+  .site-branding .article-navigation .title-website h2 span{
+    display: none;
+  }
+
+  body .home-fixe-navigation .nav-menu{
+    width: 90%!important;
+  }
+}
+

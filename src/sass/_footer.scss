@@ -2,14 +2,71 @@
 
 /*********************************FOOTER*******************************************/
 
+
+footer{
+
+  .voir-calendrier{
+    position: relative;
+    margin-top: 0!important;
+    height: 35px;
+    display: flex;
+    align-items: center;
+
+.global-bg{
+      background-color: $global;
+    }
+
+
+    .reserver {
+      overflow: hidden;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: clip;
+      font-size: 12px;
+      font-weight: bold;
+      margin-right: 20px;
+      margin-top: 1px;
+    }
+
+    .fleche{
+      height: 12px;
+      position: absolute;
+      right: 50%;
+      transition: right 0.2s linear;
+      transition-delay: 0.2s;
+    }
+    .reserver .mask {
+      position: absolute;
+      transition: all 0.3s linear;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  .voir-calendrier:hover .mask{
+    right: 100%;
+  }
+
+  .voir-calendrier:hover .fleche{
+    right: 0;
+    transition: right 0.2s linear;
+  }
+}
+
+
 .home-footer{
   width: 80%;
-  padding: 0 30px;
+  padding: 0 50px;
 }
 
 .article-footer{
   width: 100%;
-  padding: 0 30px;
+  padding: 0 50px;
+
 }
 
 .partie-evenements{
@@ -59,6 +116,13 @@
       font-size: 12px;
       margin: 0 3%;
     }
+    .menu-item-245{
+      margin: 0 3% 0 2px;
+    }
+
+    .menu-item-54{
+      margin: 0 2px 0 3%;
+    }
   }
   .biocoop-footer{
     display: flex;
@@ -74,6 +138,11 @@
 @media (max-width: 768px){
   .home-footer{
     width: 100%;
+    padding: 0 30px!important;
+  }
+  .article-footer{
+    width: 100%;
+    padding: 0 30px!important;
   }
   .partie-evenements{
     display: none;
@@ -97,6 +166,15 @@
   }
 }
 
+
+.single{
+  .article-footer{
+    background-color: $back;
+    .global-bg{
+    background-color: $back!important;
+  }
+  }
+}
 
 
 

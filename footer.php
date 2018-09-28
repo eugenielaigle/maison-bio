@@ -21,8 +21,8 @@
 	<div class="partie-evenements">
 		<h4>EVENEMENTS</h4>
 		<p class="chapeau">Retrouvez l'ensemble des évènements à venir</p>
-		<a class="voir-calendrier" href="">
-			<p class="reserver">VOIR LE CALENDRIER</p>
+		<a class="voir-calendrier" href="<?php bloginfo('url'); ?>/evenements/">
+			<p class="reserver"><span class="mask global-bg"></span>VOIR LE CALENDRIER</p>
 			<img class="fleche" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/fleche.svg" alt="Voir le Calendrier">
 		</a>
 	</div>
@@ -55,8 +55,8 @@
 		<div class="partie-evenements">
 			<h4>EVENEMENTS</h4>
 			<p class="chapeau">Retrouvez l'ensemble des évènements à venir</p>
-			<a class="voir-calendrier" href="">
-				<p class="reserver">VOIR LE CALENDRIER</p>
+			<a class="voir-calendrier" href="<?php bloginfo('url'); ?>/evenements/">
+				<p class="reserver"><span class="mask global-bg"></span>VOIR LE CALENDRIER</p>
 				<img class="fleche" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/fleche.svg" alt="Voir le Calendrier">
 			</a>
 		</div>

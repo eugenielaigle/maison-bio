@@ -8,28 +8,28 @@
  */
 
 ?>
-
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<?php if ( 'post' === get_post_type() ) : ?>
+<article id="post-<?php the_ID(); ?>"  <?php post_class('post'); ?>>
 	<header class="entry-header">
-		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
-		<?php if ( 'post' === get_post_type() ) : ?>
-		<div class="entry-meta">
-			<?php
-			maison_biologique_posted_on();
-			maison_biologique_posted_by();
-			?>
-		</div><!-- .entry-meta -->
-		<?php endif; ?>
+					<div class="entry-thumbnail">
+					<?php  maison_biologique_post_thumbnail();?>
+				</div>
+				<div class="infos-article">
+					<div class="category-date">
+					<h3 class="entry-category"><?php the_category(); ?></h3>
+					<p class="article-date"><?php  echo get_the_date();?></p>
+					</div>
+					<div class="bloc-title">
+					<h2 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php  the_title();?></a></h2>
+					<p class="entry-date"><?php  echo get_the_date();?> par <?php the_field('author'); ?></p>
+					</div>
+					<div class="entry-excerpt-une"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php echo wpse_custom_excerpts(30); ?></a></div>
+					<div class="entry-excerpt"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php echo wpse_custom_excerpts(10); ?></a></div>
+					<hr>
+				</div>
+
 	</header><!-- .entry-header -->
 
-	<?php maison_biologique_post_thumbnail(); ?>
-
-	<div class="entry-summary">
-		<?php the_excerpt(); ?>
-	</div><!-- .entry-summary -->
-
-	<footer class="entry-footer">
-		<?php maison_biologique_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
+<?php endif; ?>

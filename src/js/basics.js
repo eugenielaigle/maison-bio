@@ -1,39 +1,137 @@
+jQuery(document).ready(function($){
+// ANIMATION BARRE POUR SCROLL BODY
+$('.border-menu').append('<div id="progress" class="xs-invisible"></div>');
+$('.border-menu').append('<div id="progress-bar" class="xs-visible"></div>');
+  // $('#navbar').append('<div id="progress-bar" class="xs-visible"></div>');
 
-// jQuery(document).ready(function($){
-// var yourImg = $('.entry-thumbnail img');
-// if(yourImg && yourImg.style) {
+  if ($(window).width()<=768){
+  $(document).on('scroll',function(){ // Détection du scroll
 
-//     var imgWidth = yourImg.style.width;
-//     yourImg.style.width = '100%';
-//     yourImg.style.height = yourImg.style.width;
-// }
-// });
+    // Calcul de la hauteur "utile"
+    var hauteur = $(document).height()-$(window).height();
+
+    // Récupération de la position verticale
+    var position = $(document).scrollTop();
+
+    // Récupération de la largeur de la fenêtre
+    var largeur = $('#site-navigation').width();
+    // var largeur = $('#navbar').width();
+
+    // Calcul de la largeur de la barre
+    var barre = position / hauteur * largeur;
+
+    // Modification du CSS pour élargir ou réduire la barre
+    $("#progress-bar").css("width",barre);
+});
 
 
-// var HorsSujet = function () {
-//   var objet = document.getElementsByClassName("size-post-thumbnail"); //moi : id du div.
-//   var parent = objet.parentNode;
-//   var p_size = { //On récupère la taille.
-//     x: parent.offsetWidth,
-//     y: parent.offsetHeight
-//   };
-//   var c_size = { //On récupère le pourcentage.
-//     x: objet.getAttribute("mywidth"),
-//     y: objet.getAttribute("myheight")
-//   };
-//   var n_size = { //On calcul la taille.
-//     x: p_size.x * c_size.x/100,
-//     y: p_size.y * c_size.y/100
-//   };
+} else if ($(window).width() == 1024){
+  $(document).on('scroll',function(){ // Détection du scroll
 
-//   if (n_size.x <= n_size.y) { //Cette condition donne la priorité à la taille la plus petite.
-//     objet.style.width = n_size.x+"px";
-//     objet.style.height = n_size.x+"px";
-//   } else {
-//     objet.style.width = n_size.y+"px";
-//     objet.style.height = n_size.y+"px";
-//   }
-// };
+    // Calcul de la hauteur "utile"
+    var hauteur = $(document).height()-$(window).height();
 
-// window.onresize = HorsSujet;
-// HorsSujet(); //On appelle une première fois le script (obligatoire).
+    // Récupération de la position verticale
+    var position = $(document).scrollTop();
+
+    // Récupération de la largeur de la fenêtre
+    var largeur = $('.border-menu').width();
+    // var largeur = $('#navbar').width();
+
+    // Calcul de la largeur de la barre
+    var barre = position / hauteur * largeur;
+
+    // Modification du CSS pour élargir ou réduire la barre
+    $("#progress").css("width",barre);
+});
+
+  $(document).on('scroll',function(){ // Détection du scroll
+
+    // Calcul de la hauteur "utile"
+    var hauteur = $(document).height()-$(window).height();
+
+    // Récupération de la position verticale
+    var position = $(document).scrollTop();
+
+    // Récupération de la largeur de la fenêtre
+    var largeur = $('.border-menu').width();
+    // var largeur = $('#navbar').width();
+
+    // Calcul de la largeur de la barre
+    var barre = position / hauteur * largeur;
+
+    // Modification du CSS pour élargir ou réduire la barre
+    $("#progress-bar").css("width",barre);
+});
+} else if ($(window).width() > 768 && $('body').hasClass('home')){
+
+    $(document).on('scroll',function(){ // Détection du scroll
+
+    // Calcul de la hauteur "utile"
+    var hauteur = $(document).height()-$(window).height();
+
+    // Récupération de la position verticale
+    var position = $(document).scrollTop();
+
+    // Récupération de la largeur de la fenêtre
+    var largeur = $('.border-menu').width();
+
+    // Calcul de la largeur de la barre
+    var barre = position / hauteur * largeur;
+
+    // Modification du CSS pour élargir ou réduire la barre
+    if($(window).scrollTop() > 250){
+        $("#progress").css("width",barre);
+    } else if ($(window).scrollTop() < 250) {
+        $("#progress").css("width",0);
+    }
+});
+
+}else {
+    $(document).on('scroll',function(){ // Détection du scroll
+
+    // Calcul de la hauteur "utile"
+    var hauteur = $(document).height()-$(window).height();
+
+    // Récupération de la position verticale
+    var position = $(document).scrollTop();
+
+    // Récupération de la largeur de la fenêtre
+    var largeur = $('.border-menu').width();
+
+    // Calcul de la largeur de la barre
+    var barre = position / hauteur * largeur;
+
+    // Modification du CSS pour élargir ou réduire la barre
+    $("#progress").css("width",barre);
+});
+}
+
+if ($(window).width()<=767 && $('body').hasClass('home')){
+  $('#site-navigation .menu-toggle').on('click', function(){
+    $('.article-navigation .menu-menu-home-principal-container').slideToggle();
+    $('.article-navigation .menu-toggle img').toggle();
+    // $('.article-navigation .menu-toggle p').slideToggle();
+});
+}else if ($(window).width()>=767 && $(window).width()<=769 && $('body').hasClass('home')){
+$('#site-navigation .menu-toggle').on('click', function(){
+    $('.top-navigation .menu-menu-home-principal-container').slideToggle();
+    $('.article-navigation .menu-menu-home-principal-container').slideToggle();
+    $('.article-navigation .menu-toggle img').toggle();
+    // $('.article-navigation .menu-toggle p').slideToggle();
+});
+
+}else{
+    $('.article-navigation .menu-toggle').on('click', function(){
+        $('.menu-menu-home-principal-container').slideToggle();
+        $('.menu-toggle img').slideToggle();
+        $('.menu-toggle p').slideToggle();
+    });
+}
+
+
+
+});
+
+
+

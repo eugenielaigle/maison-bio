@@ -8,7 +8,7 @@
  */
 
 function my_function_admin_bar(){
-    return false;
+	return false;
 }
 add_filter( 'show_admin_bar' , 'my_function_admin_bar');
 
@@ -132,12 +132,24 @@ function maison_biologique_scripts() {
 	wp_enqueue_style( 'maison-biologique-style', get_stylesheet_uri() );
 
 	// style.min.css
-  wp_register_style('scss-style', get_template_directory_uri().'/assets/css/style.min.css', array());
-  wp_enqueue_style('scss-style');
+	wp_register_style('scss-style', get_template_directory_uri().'/assets/css/style.min.css', array());
+	wp_enqueue_style('scss-style');
 
-	wp_enqueue_script( 'basics', get_template_directory_uri() . '/assets/js/basics.js', array(), '20180904', true );
+	// wp_enqueue_script( 'basics', get_template_directory_uri() . '/assets/js/basics.js', array(), '20180904', true );
 
 	wp_enqueue_script( 'maison-biologique-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), '20151215', true );
+
+		wp_enqueue_script( 'maison-biologique-basics', get_template_directory_uri() . '/assets/js/basics.js', array(), '20151215', true );
+wp_register_script('maison-biologique-home', get_template_directory_uri() . '/assets/js/home.js', array(), '20151215', true );
+
+  if( is_front_page() ):
+    wp_enqueue_script('maison-biologique-home');
+  endif;
+
+	if( is_page('magasins') ):
+		wp_enqueue_script( 'google-map', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAH1OZAzr0uHVAKxj270Gg3HnPQrK4yOV8', array(), '3', true );
+		wp_enqueue_script( 'google', get_template_directory_uri() . '/assets/js/map.js', array('google-map', 'jquery'), '0.1', true );
+	endif;
 
 	wp_enqueue_script( 'maison-biologique-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20151215', true );
 
@@ -228,8 +240,7 @@ function cptui_register_my_cpts() {
 		"rewrite" => array( "slug" => "evenements", "with_front" => true ),
 		"query_var" => true,
 		"menu_icon" => "http://localhost/maison-bio/wp-content/uploads/2018/08/calendar-icon-1.png",
-		"supports" => array( "title", "editor", "thumbnail", "custom-fields" ),
-		"taxonomies" => array( "post_tag" ),
+		"supports" => array( "title", "editor", "thumbnail", "custom-fields" )
 	);
 
 	register_post_type( "evenements", $args );
@@ -240,19 +251,142 @@ add_action( 'init', 'cptui_register_my_cpts' );
 /* Retirer les préfixes sur les pages d'archives */
 function wpc_remove_archive_title_prefix() {
 	if (is_category()) {
-			$title = single_cat_title('', false);
-		} elseif (is_tag()) {
-			$title = single_tag_title('', false);
-		} elseif (is_author()) {
-			$title = '<span class="vcard">' . get_the_author() . '</span>' ;
-		} elseif (is_post_type_archive()) {
-			 $title = post_type_archive_title('', false);
-		}
+		$title = single_cat_title('', false);
+	} elseif (is_tag()) {
+		$title = single_tag_title('', false);
+	} elseif (is_author()) {
+		$title = '<span class="vcard">' . get_the_author() . '</span>' ;
+	} elseif (is_post_type_archive()) {
+		$title = post_type_archive_title('', false);
+	}
 	return $title;
 }
 add_filter('get_the_archive_title', 'wpc_remove_archive_title_prefix');
 
 
 function wpse_custom_excerpts($limit) {
-    return wp_trim_words(get_the_excerpt(), $limit, '&nbsp;&hellip;');
+	return wp_trim_words(get_the_excerpt(), $limit, '&nbsp;&hellip;');
+}
+
+
+
+function my_acf_init() {
+
+	acf_update_setting('google_api_key', 'AIzaSyAH1OZAzr0uHVAKxj270Gg3HnPQrK4yOV8');
+}
+
+add_action('acf/init', 'my_acf_init');
+
+add_filter ( 'wpcf7_support_html5_fallback', '__return_true' );
+
+// CONTACT FORM 7 - ENVOYER COPIE - CHOIX
+add_filter( 'wpcf7_additional_mail', 'my3_wpcf7_additional_mail', 10, 2 );
+function my3_wpcf7_additional_mail( array $mails, WPCF7_ContactForm $form ) {
+	$opts = $form->additional_setting( 'send_email_copy' );
+	if ( empty( $opts[0] ) ) {
+		return $mails;
+	}
+
+  /*
+   * $opts[0] = Name of the checkbox field.
+   * $opts[1] = Name of the user's email field.
+   * $opts[2] = Name of the email template.
+   */
+  $opts = explode( '|', $opts[0] );
+  if ( count( $opts ) < 3 ) {
+  	return $mails;
+  }
+
+  // Check if we're using a valid Mail template.
+  if ( ( 'mail' !== $opts[2] )
+  	&& ( 'mail_2' !== $opts[2] ) ) {
+  	return $mails;
+}
+
+$submission = WPCF7_Submission::get_instance();
+
+  // The user may not want a copy of the email.
+$values = $submission->get_posted_data( $opts[0] );
+if ( ! is_array( $values ) || empty( $values[0] ) ) {
+	return $mails;
+}
+
+  // The address to be sent a copy of the email.
+$email = $submission->get_posted_data( $opts[1] );
+if ( ! wpcf7_is_email( $email ) ) {
+	return $mails;
+}
+
+$mail = $form->prop( $opts[2] );
+if ( $mail && is_array( $mail ) ) {
+	$mail['recipient'] = $email;
+	$mails[ $opts[2] . '_copy' ] = $mail;
+}
+
+return $mails;
+}
+
+
+// CUSTOM DATE CONTACT FORM 7 FORMULAIRE DE RESERVATIOn
+function cf7_add_post_id(){
+
+    global $post;
+    return get_the_date('l j F Y');
+}
+
+add_shortcode('CF7_ADD_POST_ID', 'cf7_add_post_id');
+
+
+// REDIRIGER APRES FORMULAIRE DE CONTACT
+function add_this_script_footer(){ ?>
+	<script>
+		document.addEventListener( 'wpcf7mailsent', function( event ) {
+			setTimeout(function(){
+				location = history.go(-1);
+			}, 1000);
+		}, false );
+	</script>
+	<?php }
+	add_action('wp_footer', 'add_this_script_footer');
+
+
+
+// RECHERCHE
+
+// AJAX
+function add_js_scripts() {
+ wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/js/script.js', array(), '20151215', true );
+
+// pass Ajax Url to script.js
+wp_localize_script('script', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
+}
+add_action('wp_enqueue_scripts', 'add_js_scripts');
+
+
+add_action( 'wp_ajax_search', 'search' );
+add_action( 'wp_ajax_nopriv_search', 'search' );
+
+function search() {
+  global $wp_query;
+  $search = $_POST['search_val'];
+  // var_dump($search);
+  $args = array(
+    's' => $search,
+    'posts_per_page' => 10
+      );
+
+  $results_query = new WP_Query($args);
+ if ( $results_query->have_posts() ) :
+
+			while ($results_query->have_posts()) : $results_query->the_post();
+				get_template_part( 'template-parts/content-search', get_post_type() );
+		endwhile;
+
+	else :
+
+		get_template_part( 'template-parts/content', 'none' );
+
+	endif;
+
+die();
 }

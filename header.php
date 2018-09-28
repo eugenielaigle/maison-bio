@@ -29,8 +29,11 @@
 
 				<!-- Menu sur page home -->
 				<?php if ( is_front_page() && is_home() ) :?>
-				<nav id="site-navigation" class="main-navigation">
+				<nav id="site-navigation" class="main-navigation top-navigation">
 					<div class="border-menu">
+						<div class="xs-visible loupe " id="loupe">
+									<img src="<?php bloginfo('stylesheet_directory') ?>/assets/img/loupe.svg" width="16px" alt="">
+								</div>
 						<div class="top-menu">
 							<a class="nav-home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
 								<div class="title-website">
@@ -38,10 +41,17 @@
 									<div class="journal">
 										<h2>JOURNAL<sup>#</sup></h2>
 									</div>
-									<h3 class="maison-bio">MAISON BIOLOGIQUE</h3>
+									<div class="j-article">
+										<h2>J<sup>#</sup><span class="maison-bio">MAISON BIOLOGIQUE</span></h2>
+										<h3 class="maison-bio xs-visible">MAISON BIOLOGIQUE</h3>
+									</div>
+									<h3 class="maison-bio mb-article-invisible">MAISON BIOLOGIQUE</h3>
 								</div>
 							</a>
-							<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><img src="<?php bloginfo('stylesheet_directory') ?>/assets/img/menu-mobile.svg" alt=""></button>
+							<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+								<img src="<?php bloginfo('stylesheet_directory') ?>/assets/img/menu-mobile.svg" alt="">
+								<p>+</p>
+							</button>
 							<div class="menu-right">
 								<div class="phrase-intro">
 									<h3>S'investir sur le territoire du pays de Douarnenez et du Cap Sizun à travers des initiatives responsables.</h3>
@@ -49,57 +59,67 @@
 								</div>
 							</div>
 						</div>
-						<?php
-						wp_nav_menu( array(
-							'theme_location' => 'menu-1',
-							'menu_id'        => 'primary-menu',
-						) );
-						?>
-					</div>
-				</nav><!-- #site-navigation -->
-				<aside class="bandeau-droite">
-					<?php
-					$args = array(
-						'post_type' => ('evenements'),
-						'post_status' => 'future',
-						'order' => 'asc',
-						'showposts' => 3
-					);
-					$event = new WP_Query($args);
-					if ( $event->have_posts() ) : while ( $event->have_posts() ) : $event->the_post();?>
-						<div class="event-bloc">
-							<a class="link-title" href="<?php the_permalink() ?>">
-								<h5 class="the-date"><?php echo get_the_date('j F'); ?></h5>
-								<?php
-								$event_title = get_field('titre_de_levenement');
-
-								if( $event_title ): ?>
-									<h4><?php echo $event_title['titre_ligne_1']; ?></h4>
-									<h4>
-										<span><?php echo $event_title['titre_ligne_2']['lettres_en_minuscule_italique']; ?></span>
-										<?php echo $event_title['titre_ligne_2']['lettres_en_majuscules']; ?>
-									</h4>
-								<?php endif; ?>
-								<h6><?php the_field('horaires'); ?></h6>
-							</a>
-							<a class="reservation" href="">
-								<p class="reserver">RÉSERVER</p>
-								<img class="fleche" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/fleche.svg" alt="Réserver">
-							</a>
+						<div class="menu-search">
+							<?php
+							wp_nav_menu( array(
+								'theme_location' => 'menu-1',
+								'menu_id'        => 'primary-menu',
+							) );
+							?>
+							<div class="recherche">
+								<form method="GET" action="<?php echo get_site_url(); ?>">
+									<input type="text" placeholder="VOTRE RECHERCHE" value="<?php the_search_query(); ?>" name="s" id="q" autocomplete="off">
+								</form>
+							</div>
 						</div>
-					<?php endwhile;
-				endif;?>
+					</nav><!-- #site-navigation -->
+					<aside class="bandeau-droite">
+						<?php
+						$args = array(
+							'post_type' => ('evenements'),
+							'post_status' => 'future',
+							'order' => 'asc',
+							'showposts' => 3
+						);
+						$event = new WP_Query($args);
+						if ( $event->have_posts() ) : while ( $event->have_posts() ) : $event->the_post();?>
+							<div class="event-bloc">
+								<a class="link-title" href="<?php the_permalink() ?>">
+									<h5 class="the-date"><?php echo get_the_date('j F'); ?></h5>
+									<?php
+									$event_title = get_field('titre_de_levenement');
 
-			</aside>
+									if( $event_title ): ?>
+										<h4><?php echo $event_title['titre_ligne_1']; ?></h4>
+										<h4>
+											<span><?php echo $event_title['titre_ligne_2']['lettres_en_minuscule_italique']; ?></span>
+											<?php echo $event_title['titre_ligne_2']['lettres_en_majuscules']; ?>
+										</h4>
+									<?php endif; ?>
+									<h6><?php the_field('horaires'); ?></h6>
+								</a>
+								<a class="reservation" href="<?php the_permalink(); ?>">
+									<p class="reserver"><span class="mask bandeau-bg"></span>RÉSERVER</p>
+									<img class="fleche" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/fleche.svg" alt="Réserver">
+								</a>
+							</div>
+						<?php endwhile;
+					endif;?>
+
+				</aside>
 
 
 
-			<!-- Menu sur les autres pages -->
-			<?php else :?>
+				<!-- Menu sur les autres pages -->
+				<?php else :?>
 
-				<nav id="site-navigation" class="article-navigation main-navigation">
-					<div class="border-menu">
+					<nav id="site-navigation" class="article-navigation main-navigation">
+						<div class="border-menu">
+							<div class="xs-visible loupe" id="loupe">
+									<img src="<?php bloginfo('stylesheet_directory') ?>/assets/img/loupe.svg" width="16px" alt="">
+								</div>
 							<a class="nav-home-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+
 								<div class="title-website">
 									<div class="j-article">
 										<h2>J<sup>#</sup><span class="maison-bio">MAISON BIOLOGIQUE</span></h2>
@@ -107,25 +127,36 @@
 									</div>
 								</div>
 							</a>
-							<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><img src="<?php bloginfo('stylesheet_directory') ?>/assets/img/menu-mobile.svg" alt=""></button>
-						<?php
-						wp_nav_menu( array(
-							'theme_location' => 'menu-1',
-							'menu_id'        => 'primary-menu',
-						) );
-						?>
-					</div>
-				</nav><!-- #site-navigation -->
-				<?php
-			endif;
-			$maison_biologique_description = get_bloginfo( 'description', 'display' );
-			if ( $maison_biologique_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $maison_biologique_description; /* WPCS: xss ok. */ ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+							<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+								<img src="<?php bloginfo('stylesheet_directory') ?>/assets/img/menu-mobile.svg" alt="">
+							<p>+</p>
+						</button>
+							<div class="menu-search">
+							<?php
+							wp_nav_menu( array(
+								'theme_location' => 'menu-1',
+								'menu_id'        => 'primary-menu',
+							) );
+							?>
+							<div class="recherche recherche-post">
+								<form method="GET" action="<?php echo get_site_url(); ?>">
+									<input type="text" placeholder="VOTRE RECHERCHE" value="<?php the_search_query(); ?>" name="s" id="q" autocomplete="off">
+								</form>
+							</div>
+							</div>
+						</div>
+
+					</nav><!-- #site-navigation -->
+					<?php
+				endif;
+				$maison_biologique_description = get_bloginfo( 'description', 'display' );
+				if ( $maison_biologique_description || is_customize_preview() ) :
+					?>
+					<p class="site-description"><?php echo $maison_biologique_description; /* WPCS: xss ok. */ ?></p>
+				<?php endif; ?>
+			</div><!-- .site-branding -->
 
 
-	</header><!-- #masthead -->
+		</header><!-- #masthead -->
 
-	<div id="content" class="site-content">
+		<div id="content" class="site-content">
