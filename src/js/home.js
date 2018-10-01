@@ -41,7 +41,6 @@ $(document).on('scroll', function() {
     // $('.menu-toggle p').css("display","none");
      $('.menu-menu-home-principal-container').css("display","none");
 
-
   }else if($(window).scrollTop()< 200){
     $('#site-navigation').addClass('top-navigation');
     $('#site-navigation').removeClass('article-navigation');

@@ -1,0 +1,162 @@
+/************************** CONTRIBUTEURS ***************************/
+.width-contributeurs{
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.entry-content-contributeurs{
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+  margin-bottom: 10vh;
+
+  .trombi{
+    @media(min-width: 769px){
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .contributeur{
+      width: calc(100% / 3 - 10px );
+      margin-bottom: 30px;
+
+    .container-photo{ /*container*/
+      width: 100%;
+      height: 0;
+      padding-top: 100%;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 10px;
+    img{/*image dans le container*/
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+  .nom-contributeur, .profession-contributeur{
+    font-family: "Caslon 540";
+    font-size: 12px;
+    font-style: italic;
+    line-height: 19px;
+  }
+  .profession-contributeur{
+    text-align: justify;
+  }
+}
+}
+.contributeurs-infos{
+  border-left: 0.5px solid $line;
+  margin-left: 30px;
+  padding-left: 30px;
+  p{
+    font-family: "Caslon 540";
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: justify;
+  }
+  .devenir-contributeur{
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+
+    .reserver{
+      font-family: "Adobe Caslon";
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: clip;
+      font-size: 12px;
+      font-weight: bold;
+      margin-right: 10px;
+      margin-top: 1px;
+    }
+    .fleche{
+      height: 12px;
+    }
+  }
+}
+}
+
+
+@media(max-width: 768px){
+  .contributeurs-title{
+    font-size: 30px!important;
+  }
+
+  .site-main .width-contributeurs{
+    padding: 0;
+  }
+
+  .site-main .entry-content-contributeurs {
+    display: flex;
+    flex-direction: column;
+    // position: relative;
+    //   height: 100%;
+  }
+
+  .site-main .entry-content-contributeurs .trombi .contributeur{
+    width: 100%;
+  }
+
+  .site-main .entry-content-contributeurs .contributeurs-infos{
+    margin-left: 0;
+    padding-left: 0;
+    border: none;
+  }
+}
+
+
+@media (max-width: 769px) {
+  .swiper-container{
+    // position: relative;
+    // display: flex;
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    overflow: hidden;
+      // overflow-x: hidden;
+    }
+    .swiper-wrapper{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-transition-property: -webkit-transform;
+      transition-property: -webkit-transform;
+      -o-transition-property: transform;
+      transition-property: transform;
+      transition-property: transform,-webkit-transform;
+      -webkit-box-sizing: content-box;
+      box-sizing: content-box;
+    // flex-wrap: nowrap!important;
+  }
+  .swiper-slide{
+    padding-right: 15px!important;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    -o-transition-property: transform;
+    transition-property: transform;
+    transition-property: transform,-webkit-transform;
+  }
+  // .swiper-slide:nth-child(2n) {
+  //   width: 60%;
+  // }
+  // .swiper-slide:nth-child(3n) {
+  //   width: 40%;
+  // }
+}

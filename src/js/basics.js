@@ -134,4 +134,16 @@ $('#site-navigation .menu-toggle').on('click', function(){
 });
 
 
+jQuery(document).ready(function ($) {
+    //initialize swiper when document ready
+   if ($(window).width()<=768){
+    var mySwiper = new Swiper ('.swiper-container', {
+      // Optional parameters
+      direction: 'horizontal',
+      init: true,
+      width: 260
+    });
+       }
+  });
+
 

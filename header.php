@@ -14,7 +14,7 @@
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
 	<?php wp_head(); ?>
@@ -122,7 +122,8 @@
 
 								<div class="title-website">
 									<div class="j-article">
-										<h2>J<sup>#</sup><span class="maison-bio">MAISON BIOLOGIQUE</span></h2>
+										<h2 id="titre-post-header"><span class="maison-bio"><?php the_title(); ?></span></h2>
+										<h2 id="j-post">J<sup>#</sup><span class="maison-bio">MAISON BIOLOGIQUE</span></h2>
 										<h3 class="maison-bio xs-visible">MAISON BIOLOGIQUE</h3>
 									</div>
 								</div>

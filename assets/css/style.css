@@ -78,7 +78,7 @@ table {
 
 @font-face {
   font-family: 'Caslon 540';
-  src: url("../fonts/Caslon540-Roman.otf"); }
+  src: url("../fonts/Caslon-Fiveforty.otf"); }
 
 /******************************** 1/2 BANDEAU DE DROITE *****************************/
 .bandeau-droite {
@@ -1305,6 +1305,135 @@ input[type="checkbox"]:checked {
   .site-main .magasin-2 {
     height: 150vh; } }
 
+/************************** CONTRIBUTEURS ***************************/
+.width-contributeurs {
+  padding-left: 10%;
+  padding-right: 10%; }
+
+.entry-content-contributeurs {
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+  margin-bottom: 10vh; }
+
+@media (min-width: 769px) {
+  .entry-content-contributeurs .trombi {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between; } }
+
+.entry-content-contributeurs .trombi .contributeur {
+  width: calc(100% / 3 - 10px);
+  margin-bottom: 30px; }
+
+.entry-content-contributeurs .trombi .contributeur .container-photo {
+  /*container*/
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px; }
+
+.entry-content-contributeurs .trombi .contributeur .container-photo img {
+  /*image dans le container*/
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+.entry-content-contributeurs .trombi .contributeur .nom-contributeur, .entry-content-contributeurs .trombi .contributeur .profession-contributeur {
+  font-family: "Caslon 540";
+  font-size: 12px;
+  font-style: italic;
+  line-height: 19px; }
+
+.entry-content-contributeurs .trombi .contributeur .profession-contributeur {
+  text-align: justify; }
+
+.entry-content-contributeurs .contributeurs-infos {
+  border-left: 0.5px solid #b1b1b1;
+  margin-left: 30px;
+  padding-left: 30px; }
+
+.entry-content-contributeurs .contributeurs-infos p {
+  font-family: "Caslon 540";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 25px;
+  text-align: justify; }
+
+.entry-content-contributeurs .contributeurs-infos .devenir-contributeur {
+  display: flex;
+  align-items: center;
+  margin-top: 50px; }
+
+.entry-content-contributeurs .contributeurs-infos .devenir-contributeur .reserver {
+  font-family: "Adobe Caslon";
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 10px;
+  margin-top: 1px; }
+
+.entry-content-contributeurs .contributeurs-infos .devenir-contributeur .fleche {
+  height: 12px; }
+
+@media (max-width: 768px) {
+  .contributeurs-title {
+    font-size: 30px !important; }
+  .site-main .width-contributeurs {
+    padding: 0; }
+  .site-main .entry-content-contributeurs {
+    display: flex;
+    flex-direction: column; }
+  .site-main .entry-content-contributeurs .trombi .contributeur {
+    width: 100%; }
+  .site-main .entry-content-contributeurs .contributeurs-infos {
+    margin-left: 0;
+    padding-left: 0;
+    border: none; } }
+
+@media (max-width: 769px) {
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden; }
+  .swiper-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    -o-transition-property: transform;
+    transition-property: transform;
+    transition-property: transform,-webkit-transform;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box; }
+  .swiper-slide {
+    padding-right: 15px !important;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    -o-transition-property: transform;
+    transition-property: transform;
+    transition-property: transform,-webkit-transform; } }
+
 /*********************** MENTIONS LEGALES **************************/
 @media (min-width: 769px) {
   .row-infos {
@@ -1558,7 +1687,7 @@ input[type="checkbox"]:checked {
     overflow: visible;
     clip: auto; }
   .home .top-navigation .menu-search .nav-menu .menu-item-12, .home .top-navigation .menu-search .nav-menu .menu-item-28 {
-    margin-bottom: 10vh; }
+    margin-bottom: 5vh; }
   .home .top-navigation .menu-search .nav-menu .menu-item-34 {
     margin-bottom: 15px; }
   .main-navigation {
@@ -1706,7 +1835,14 @@ input[type="checkbox"]:checked {
     padding: 0 15px; }
   .site-branding .article-navigation .j-article {
     display: block !important; }
+  .site-branding .article-navigation .title-website #titre-post-header {
+    position: absolute;
+    top: 5px; }
+  .site-branding .article-navigation .title-website #titre-post-header span {
+    font-size: 14px !important;
+    margin-left: 0 !important; }
   .site-branding .article-navigation .border-menu {
+    position: relative;
     padding-top: 0;
     height: 100%;
     display: flex;
@@ -1814,7 +1950,7 @@ input[type="checkbox"]:checked {
     overflow: visible;
     clip: auto; }
   .site-branding .article-navigation .nav-menu .menu-item-12, .site-branding .article-navigation .nav-menu .menu-item-28 {
-    margin-bottom: 10vh; }
+    margin-bottom: 5vh; }
   .site-branding .article-navigation .nav-menu .menu-item-34 {
     margin-bottom: 15px; }
   .site-branding .article-navigation .recherche {
@@ -2034,7 +2170,13 @@ footer .voir-calendrier:hover .fleche {
   .site-branding .article-navigation .title-website h2 span {
     display: none; }
   body .home-fixe-navigation .nav-menu {
-    width: 90% !important; } }
+    width: 90% !important; }
+  body .footer-home .maison-bio {
+    font-size: 14px; }
+  body .footer-home .menu-menu-footer-container {
+    width: 43%; }
+  body .footer-home #footer-menu li {
+    font-size: 10px; } }
 
 #progress {
   background-color: black;
@@ -2151,3 +2293,7 @@ strong {
 
 i, em {
   font-style: italic !important; }
+
+#titre-post-header {
+  display: none;
+  top: 0; }

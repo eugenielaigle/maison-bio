@@ -68,8 +68,7 @@
                 $lien = get_permalink();
                 $titre = strip_tags(get_the_title());
                 $facebook_link  = 'https://www.facebook.com/sharer/sharer.php?u='.$lien;
-                $twitter_link  = 'https://twitter.com/share?url=' . $lien . '&text=' . $titre ;
-                $mail_link = 'mailto:?subject=' . $titre . '&body=' . $titre . ' - ' . $lien ;
+                $twitter_link  = 'http://www.linkedin.com/shareArticle?mini=true&url=' . $lien . '&title=' . $titre;
                 ?>
                 <p class="partagez">PARTAGER:</p>
                 <a class="partage-facebook" href="<?php echo $facebook_link;?>" target="_blank">FACEBOOK</a>

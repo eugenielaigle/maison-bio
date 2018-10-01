@@ -12,6 +12,7 @@
 @import 'src/sass/search';
 @import 'src/sass/contact';
 @import 'src/sass/magasins';
+@import 'src/sass/contributeurs';
 @import 'src/sass/mentions';
 
 // ELEMENTS COMMUNS
@@ -177,3 +178,7 @@ strong {font-weight: bold!important;}
 i, em {font-style: italic!important;}
 
 
+#titre-post-header{
+  display: none;
+  top: 0;
+}

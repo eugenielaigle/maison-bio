@@ -50,5 +50,16 @@ and (orientation : landscape) {
   body .home-fixe-navigation .nav-menu{
     width: 90%!important;
   }
+
+  body .footer-home .maison-bio{
+    font-size: 14px;
+  }
+  body .footer-home .menu-menu-footer-container{
+    width: 43%;
+  }
+
+  body .footer-home #footer-menu li{
+        font-size: 10px;
+  }
 }
 

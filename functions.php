@@ -139,12 +139,21 @@ function maison_biologique_scripts() {
 
 	wp_enqueue_script( 'maison-biologique-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), '20151215', true );
 
-		wp_enqueue_script( 'maison-biologique-basics', get_template_directory_uri() . '/assets/js/basics.js', array(), '20151215', true );
-wp_register_script('maison-biologique-home', get_template_directory_uri() . '/assets/js/home.js', array(), '20151215', true );
+	wp_enqueue_script( 'maison-biologique-basics', get_template_directory_uri() . '/assets/js/basics.js', array(), '20151215', true );
 
-  if( is_front_page() ):
-    wp_enqueue_script('maison-biologique-home');
-  endif;
+	wp_enqueue_script('swiper', get_template_directory_uri() . '/assets/swiper/dist/js/swiper.min.js', array('jquery'), '4.9.6', true );
+
+	wp_register_script('maison-biologique-home', get_template_directory_uri() . '/assets/js/home.js', array(), '20151215', true );
+
+	if( is_front_page() ):
+		wp_enqueue_script('maison-biologique-home');
+	endif;
+
+	wp_register_script('maison-biologique-single', get_template_directory_uri() . '/assets/js/single.js', array(), '20151215', true );
+
+	if( is_single() ):
+		wp_enqueue_script('maison-biologique-single');
+	endif;
 
 	if( is_page('magasins') ):
 		wp_enqueue_script( 'google-map', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAH1OZAzr0uHVAKxj270Gg3HnPQrK4yOV8', array(), '3', true );
@@ -330,8 +339,8 @@ return $mails;
 // CUSTOM DATE CONTACT FORM 7 FORMULAIRE DE RESERVATIOn
 function cf7_add_post_id(){
 
-    global $post;
-    return get_the_date('l j F Y');
+	global $post;
+	return get_the_date('l j F Y');
 }
 
 add_shortcode('CF7_ADD_POST_ID', 'cf7_add_post_id');
@@ -354,39 +363,60 @@ function add_this_script_footer(){ ?>
 // RECHERCHE
 
 // AJAX
-function add_js_scripts() {
- wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/js/script.js', array(), '20151215', true );
+	function add_js_scripts() {
+		wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/js/script.js', array(), '20151215', true );
 
 // pass Ajax Url to script.js
-wp_localize_script('script', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
-}
-add_action('wp_enqueue_scripts', 'add_js_scripts');
+		wp_localize_script('script', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
+	}
+	add_action('wp_enqueue_scripts', 'add_js_scripts');
 
 
-add_action( 'wp_ajax_search', 'search' );
-add_action( 'wp_ajax_nopriv_search', 'search' );
+	add_action( 'wp_ajax_search', 'search' );
+	add_action( 'wp_ajax_nopriv_search', 'search' );
 
-function search() {
-  global $wp_query;
-  $search = $_POST['search_val'];
+	function search() {
+		global $wp_query;
+		$search = $_POST['search_val'];
   // var_dump($search);
-  $args = array(
-    's' => $search,
-    'posts_per_page' => 10
-      );
+		$args = array(
+			's' => $search,
+			'posts_per_page' => 10
+		);
 
-  $results_query = new WP_Query($args);
- if ( $results_query->have_posts() ) :
+		$results_query = new WP_Query($args);
+		if ( $results_query->have_posts() ) :
 
 			while ($results_query->have_posts()) : $results_query->the_post();
 				get_template_part( 'template-parts/content-search', get_post_type() );
-		endwhile;
+			endwhile;
 
-	else :
+		else :
 
-		get_template_part( 'template-parts/content', 'none' );
+			get_template_part( 'template-parts/content', 'none' );
 
-	endif;
+		endif;
 
-die();
-}
+		die();
+	}
+
+
+// GOOGLE ANALYTICS
+	add_action('wp_head','my_analytics', 20);
+
+	function my_analytics() {
+		?>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-85103120-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-126639402-1');
+		</script>
+
+
+		<?php
+	}
+
