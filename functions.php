@@ -153,25 +153,25 @@ function maison_biologique_scripts() {
 
 	if( is_category() || is_front_page()):
 		wp_enqueue_script('fondu');
-	endif;
+endif;
 
-	wp_register_script('maison-biologique-single', get_template_directory_uri() . '/assets/js/single.js', array(), '20151215', true );
+wp_register_script('maison-biologique-single', get_template_directory_uri() . '/assets/js/single.js', array(), '20151215', true );
 
-	if( is_single() ):
-		wp_enqueue_script('maison-biologique-single');
-	endif;
+if( is_single() ):
+	wp_enqueue_script('maison-biologique-single');
+endif;
 
 
-	if( is_page('magasins') ):
-		wp_enqueue_script( 'google-map', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAH1OZAzr0uHVAKxj270Gg3HnPQrK4yOV8', array(), '3', true );
-		wp_enqueue_script( 'google', get_template_directory_uri() . '/assets/js/map.js', array('google-map', 'jquery'), '0.1', true );
-	endif;
+if( is_page('magasins') ):
+	wp_enqueue_script( 'google-map', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAH1OZAzr0uHVAKxj270Gg3HnPQrK4yOV8', array(), '3', true );
+	wp_enqueue_script( 'google', get_template_directory_uri() . '/assets/js/map.js', array('google-map', 'jquery'), '0.1', true );
+endif;
 
-	wp_enqueue_script( 'maison-biologique-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20151215', true );
+wp_enqueue_script( 'maison-biologique-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20151215', true );
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+	wp_enqueue_script( 'comment-reply' );
+}
 }
 add_action( 'wp_enqueue_scripts', 'maison_biologique_scripts' );
 
@@ -352,10 +352,46 @@ return $mails;
 
 
 // CUSTOM DATE CONTACT FORM 7 FORMULAIRE DE RESERVATIOn
-function cf7_add_post_id(){
+function cf7_add_post_id($atts,$date, $locale = "fr"){
 
+	extract(shortcode_atts(array(
+		'key' => '',
+		'post_id' => -1,
+		'obfuscate'	=> 'off'
+	), $atts));
 	global $post;
-	return date_i18n('l j F Y');
+	if ($key == 'event_date'){
+
+		$post_id = $post->ID;
+		$val = get_post_meta($post_id, $key, true);
+		$date = new DateTime($val);
+
+		// On crée un objet IntlDateFormatter pour traduire la date
+		$idf = new IntlDateFormatter('fr_FR',
+			IntlDateFormatter::FULL,
+			IntlDateFormatter::NONE);
+
+		return $idf->format($date);
+
+	}else{
+		if($post_id < 0){
+			global $post;
+			if(isset($post)) $post_id = $post->ID;
+		}
+
+		if($post_id < 0 || empty($key)) return '';
+
+		$val = get_post_meta($post_id, $key, true);
+
+		if($obfuscate == 'on'){
+			$val = cf7dtx_obfuscate($val);
+		}
+
+		return $val;
+
+	}
+
+	 // date('l j F Y');
 }
 
 add_shortcode('CF7_get_custom_field', 'cf7_add_post_id');
@@ -367,93 +403,93 @@ add_shortcode('CF7_get_custom_field', 'cf7_add_post_id');
 function add_this_script_footer(){ ?>
 	<script>
 // if (document.body.clientWidth >768){
-		document.addEventListener( 'wpcf7mailsent', function( event ) {
-			setTimeout(function(){
-				 var nav = window.navigator;
-            if( this.phonegapNavigationEnabled &&
-                nav &&
-                nav.app &&
-                nav.app.backHistory ){
-                nav.app.backHistory();
-            } else {
-                window.history.back();
-            }
-			}, 2000);
-		}, false );
+	document.addEventListener( 'wpcf7mailsent', function( event ) {
+		setTimeout(function(){
+			var nav = window.navigator;
+			if( this.phonegapNavigationEnabled &&
+				nav &&
+				nav.app &&
+				nav.app.backHistory ){
+				nav.app.backHistory();
+		} else {
+			window.history.back();
+		}
+	}, 2000);
+	}, false );
 	// }
-	</script>
-	<?php }
-	add_action('wp_footer', 'add_this_script_footer');
+</script>
+<?php }
+add_action('wp_footer', 'add_this_script_footer');
 
 
 
 // RECHERCHE
 
 // AJAX
-	function add_js_scripts() {
-		wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/js/script.js', array(), '20151215', true );
+function add_js_scripts() {
+	wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/js/script.js', array(), '20151215', true );
 
 // pass Ajax Url to script.js
-		wp_localize_script('script', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
-	}
-	add_action('wp_enqueue_scripts', 'add_js_scripts');
+	wp_localize_script('script', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
+}
+add_action('wp_enqueue_scripts', 'add_js_scripts');
 
 
-	add_action( 'wp_ajax_search', 'search' );
-	add_action( 'wp_ajax_nopriv_search', 'search' );
+add_action( 'wp_ajax_search', 'search' );
+add_action( 'wp_ajax_nopriv_search', 'search' );
 
-	function search() {
-		global $wp_query;
-		$search = $_POST['search_val'];
+function search() {
+	global $wp_query;
+	$search = $_POST['search_val'];
   // var_dump($search);
-		$args = array(
-			's' => $search,
-			'posts_per_page' => 10
-		);
+	$args = array(
+		's' => $search,
+		'posts_per_page' => 10
+	);
 
-		$results_query = new WP_Query($args);
-		if ( $results_query->have_posts() ) :
+	$results_query = new WP_Query($args);
+	if ( $results_query->have_posts() ) :
 
-			while ($results_query->have_posts()) : $results_query->the_post();
-				get_template_part( 'template-parts/content-search', get_post_type() );
-			endwhile;
+		while ($results_query->have_posts()) : $results_query->the_post();
+			get_template_part( 'template-parts/content-search', get_post_type() );
+		endwhile;
 
-		else :
+	else :
 
-			get_template_part( 'template-parts/content', 'none' );
+		get_template_part( 'template-parts/content', 'none' );
 
-		endif;
+	endif;
 
-		die();
-	}
+	die();
+}
 
 
 // GOOGLE ANALYTICS
-	add_action('wp_head','my_analytics', 20);
+add_action('wp_head','my_analytics', 20);
 
-	function my_analytics() {
-		?>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126639402-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
+function my_analytics() {
+	?>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126639402-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
 
-			gtag('config', 'UA-126639402-1');
-		</script>
+		gtag('config', 'UA-126639402-1');
+	</script>
 
 
-		<?php
-	}
+	<?php
+}
 
 
 
 function insert_opengraph_in_head() {
 
-    global $post;
+	global $post;
     if ( !is_singular()) // On vérifie si nous somme dans un article ou une page
-	return;
+    return;
 
     echo '<meta property="og:title" content="' . get_the_title() . '"/>';
     echo '<meta property="og:type" content="article"/>';
@@ -464,5 +500,5 @@ function insert_opengraph_in_head() {
     $thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ) );
     echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '"/>';
     echo '<link rel="image_src" href="'. esc_attr( $thumbnail_src[0] ) . '" />';
-}
-add_action( 'wp_head', 'insert_opengraph_in_head', 5 );
+  }
+  add_action( 'wp_head', 'insert_opengraph_in_head', 5 );
