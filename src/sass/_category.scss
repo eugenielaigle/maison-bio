@@ -1,17 +1,26 @@
 
 /****************************** CATEGORY ***************************************/
 
-.category-main{
+.category-main, .searching-main{
   .category-header{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     margin-top: 10vh;
+    margin-bottom: 25px!important;
+ border-bottom: 0.25px solid $line;
+ padding-bottom: 10vh;
+ @media (max-width: 768px){
+  border: none;
+ }
+
     .entry-title{
       margin: 0 10vw!important;
     }
     .category-link{
+      display: flex;
+      align-items: center;
       p{
         display: inline;
       }
@@ -36,9 +45,12 @@
         width: 100%;
       }
     }
-    .category-link, .article-date{
+    .category-header .category-link, .article-date{
       display: none;
     }
+
+
+
     .category-date, .bloc-title{
       display: flex;
       justify-content: center!important;
@@ -55,8 +67,8 @@
         width: 20%;
         .post-thumbnail:hover{
           img{
-            opacity: 0.9;
-            transition: opacity 0.4s ease-in-out;
+            opacity: 0.9!important;
+            transition: opacity 0.4s ease-in-out!important;
           }
         }
       }
@@ -79,6 +91,10 @@
   }
 }
 
+.post .entry-thumbnail img{
+  object-fit: cover;
+}
+
 .post:nth-child(n+6){
   align-items: flex-end;
   display: flex;
@@ -86,6 +102,10 @@
   .infos-article{
     height: 100%;
   }
+}
+
+.post:nth-child(7n){
+  margin-top: -8%;
 }
 
 }
@@ -106,8 +126,8 @@
     text-align: left;
     width: 80%;
     text-transform: inherit!important;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
   .entry-category{
     font-size: 9px;
@@ -117,7 +137,7 @@
   .category-date{
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 20px;
     .article-date{
       font-size: 11px;
       font-style: italic;
@@ -131,7 +151,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 23px;
-    text-align: justify;
+    // text-align: justify;
   }
 }
 
@@ -141,6 +161,6 @@
 
 @media (min-width: 1800px){
   .category-main .sequence .post:nth-child(n+6){
-    margin-top: -12%!important;
+    margin-top: -10%!important;
   }
 }

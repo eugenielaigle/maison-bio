@@ -19,8 +19,8 @@
 
   }
   .a-propos-center{
-    border-left: 0.5px solid $line;
-    border-right: 0.5px solid $line;
+    border-left: 0.25px solid $line;
+    border-right: 0.25px solid $line;
     padding: 0 15%;
     font-size: 14px;
     font-weight: 400;
@@ -40,7 +40,7 @@
       justify-content: flex-end;
     }
     .infos-chiffres-cles{
-      border-bottom: 0.5px solid $line;
+      border-bottom: 0.25px solid $line;
       margin-bottom: 30px;
       padding-bottom: 30px;
       h3{
@@ -88,6 +88,9 @@
         h3, p{
           font-size: 17px;
           line-height: 23px;
+        }
+        p{
+          margin-bottom: 10px;
         }
       }
       img{

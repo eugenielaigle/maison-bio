@@ -23,17 +23,18 @@
         <div class="infos-event">
           <div class="event-group">
           <div class="event-date">
-          <p class="article-date"><?php  echo get_the_date('l j F');?></p>
+          <p class="article-date"><?php the_field('event_date');?></p>
           </div >
           <?php
                 $event_title = get_field('titre_de_levenement');
                 if( $event_title ): ?>
                   <h4><?php echo $event_title['titre_ligne_1']; ?>
-                    <span><?php echo $event_title['titre_ligne_2']['lettres_en_minuscule_italique']; ?></span>
+                    <span><?php echo $event_title['titre_ligne_2']['lettres_en_minuscule_italique']; ?></span><br>
                     <?php echo $event_title['titre_ligne_2']['lettres_en_majuscules']; ?>
                   </h4>
                 <?php endif; ?>
-          <p class="entry-date"><?php the_field('lieu'); ?> / <?php the_field('horaires'); ?></p>
+          <p class="entry-date"><?php the_field('lieu'); ?><br>
+          <?php the_field('horaires'); ?></p>
           </div>
           <div class="event-excerpt"><?php the_content(); ?>
             <p><strong>Tarif : <?php the_field('tarif'); ?></strong></p>

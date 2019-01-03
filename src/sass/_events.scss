@@ -15,7 +15,7 @@
     display: grid;
     grid-template-columns: 3fr 7fr;
     padding: 50px;
-    border-top: 0.5px solid $line;
+    border-top: 0.25px solid $line;
     .container-thumbnail{
       // padding: 50px;
       // margin: 50px;
@@ -39,7 +39,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      margin-left: 50px;
+      margin-left: 7vw;
       .event-date{
         text-transform: uppercase;
         font-size: 18px;
@@ -87,7 +87,10 @@
     padding-right: 0!important;
   }
   .infos-event{
-    margin: 50px 0 0 0!important;
+    margin: 30px 0 0 0!important;
+    h4{
+      line-height: 35px!important;
+    }
     .event-group{
       text-align: center;
     }
@@ -120,6 +123,9 @@
     .wpcf7-form .final{
       justify-content: center!important;
       margin-top: 30px;
+      @media (max-width: 768px){
+        margin-top: 20px;
+      }
 
     }
   }
@@ -133,11 +139,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10vh;
+    // margin-top: 10vh;
     margin-bottom: 10vh;
-    @media (max-width: 769px){
-      font-size: 35px!important;
-    line-height: 45px!important;
+    @media (max-width: 768px){
+      margin-top: 6vh;
+    margin-bottom: 5vh;
+      h4{
+        font-size: 30px!important;
+    line-height: 35px!important;
+    margin-bottom: 5px!important;
+      }
+      .article-date{
+        font-size: 15px;
+      }
+      .entry-date{
+        font-size: 12px;
+      }
+
     }
     span{
       text-transform: lowercase;
@@ -166,18 +184,21 @@
     display: flex;
     justify-content: center;
     font-size: 14px;
-    font-style: italic;
     line-height: 17px;
     margin-top: 30px;
     margin-bottom: 30px;
+    @media (max-width: 768px){
+      margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    }
     input[type="text"]{
       border: none!important;
       color: #000!important;
       font-weight: bold!important;
       font-size: 14px!important;
-      font-style: italic!important;
       line-height: 17px!important;
-      max-width: 150px;
+      max-width: 60px;
     }
   }
   .infosup-reservations{
@@ -185,3 +206,10 @@
   }
 }
 
+.post-type-archive-evenements .page-header{
+  margin-bottom: 5vh;
+}
+
+.post-type-archive-evenements .article-footer .partie-evenements{
+  display: none;
+}

@@ -1,5 +1,7 @@
 jQuery(document).ready(function($){
 
+if ($(window).width()>=769){
+
   $('#menu-item-34').on('click', function(e){
     e.preventDefault();
     $('.recherche').toggle();
@@ -36,8 +38,43 @@ jQuery(document).ready(function($){
       }
       );
   });
- });
 
+ });
+} else{
+
+
+    $(document).ready(function(){
+   $("#search-submit").on("click", function(event){
+    event.preventDefault();
+    var search_val = $("#s").val();
+    console.log(search_val);
+    $.post(
+      ajaxurl,
+      {
+        action:'search',
+        search_val: search_val
+      },
+      function(response){
+        console.log(response);
+        // $('#main').addClass('category-main');
+        $('#main').addClass('searching-main');
+        $('.search-found').html(response);
+         str = $('#search-submit').text();
+         console.log(str);
+         if($.trim(str) === "") {
+          $('.rechercher').hide();
+          $('.searching-main').css('margin-top', 0);
+          $('.search-form').animate({
+            'margin-top': '10vh',
+            'height': '10vh'
+          }, 200);
+         }
+
+      }
+      );
+  });
+ });
+}
 });
 
 

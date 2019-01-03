@@ -31,16 +31,20 @@
 	}
 
 	button.onclick = function() {
+		document.ontouchmove = function(e){ e.preventDefault(); }
 		if ( -1 !== container.className.indexOf( 'toggled' ) ) {
 			container.className = container.className.replace( ' toggled', '' );
 			button.setAttribute( 'aria-expanded', 'false' );
 			menu.setAttribute( 'aria-expanded', 'false' );
-			 document.body.style.overflow = "auto";
+			document.ontouchmove = function(e){}
+			document.body.style.overflow = "auto";
 		} else {
 			container.className += ' toggled';
 			button.setAttribute( 'aria-expanded', 'true' );
 			menu.setAttribute( 'aria-expanded', 'true' );
-			 document.body.style.overflow = "hidden";
+			document.ontouchmove = function(e){ e.preventDefault(); }
+			document.body.style.overflow = "hidden";
+			document.body.style.position = "relative";
 		}
 	};
 

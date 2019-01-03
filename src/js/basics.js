@@ -141,7 +141,7 @@ jQuery(document).ready(function ($) {
       // Optional parameters
       direction: 'horizontal',
       init: true,
-      width: 260
+      width: 235
     });
        }
   });

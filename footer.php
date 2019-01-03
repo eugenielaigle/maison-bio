@@ -40,7 +40,7 @@
 		?>
 		<div class="biocoop-footer">
 			<p>Sociétaire de BIOCOOP SA depuis 2016</p>
-			<img class="biocoop" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/logo-biocoop.png" alt="Biocoop">
+			<a href="https://www.biocoop.fr/" target="_blank"><img class="biocoop" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/biocoop.png" alt="Biocoop"></a>
 		</div>
 	</div>
 </footer><!-- #colophon -->
@@ -71,7 +71,7 @@
 			?>
 			<div class="biocoop-footer">
 				<p>Sociétaire de BIOCOOP SA depuis 2016</p>
-				<img class="biocoop" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/logo-biocoop.png" alt="Biocoop">
+				<a href="https://www.biocoop.fr/" target="_blank"><img class="biocoop" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/biocoop.png" alt="Biocoop"></a>
 			</div>
 		</div>
 	</footer><!-- #colophon -->

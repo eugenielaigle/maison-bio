@@ -49,7 +49,7 @@
 }
 }
 .contributeurs-infos{
-  border-left: 0.5px solid $line;
+  border-left: 0.25px solid $line;
   margin-left: 30px;
   padding-left: 30px;
   p{
@@ -63,6 +63,9 @@
     display: flex;
     align-items: center;
     margin-top: 50px;
+    @media (max-width: 768px){
+      justify-content: center;
+    }
 
     .reserver{
       font-family: "Adobe Caslon";
@@ -76,6 +79,7 @@
     }
     .fleche{
       height: 12px;
+      margin-bottom: 1px;
     }
   }
 }
@@ -140,7 +144,7 @@
     // flex-wrap: nowrap!important;
   }
   .swiper-slide{
-    padding-right: 15px!important;
+    padding-right: 10px!important;
     -webkit-flex-shrink: 0;
     -ms-flex-negative: 0;
     flex-shrink: 0;

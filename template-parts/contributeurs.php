@@ -37,7 +37,7 @@ get_header();?>
     </div>
     <div class="contributeurs-infos">
       <?php the_field('devenir_contributeur'); ?>
-      <a class="devenir-contributeur" href="">
+      <a class="devenir-contributeur" href="<?php bloginfo('url'); ?>/contact-contributeurs/">
       <p class="reserver"><span class="mask"></span>DEVENEZ CONTRIBUTEUR TERRITORIAL</p>
       <img class="fleche" src="<?php bloginfo('stylesheet_directory') ?>/assets/img/fleche.svg" alt="Devenir contributeur">
     </a>

@@ -145,8 +145,14 @@ function maison_biologique_scripts() {
 
 	wp_register_script('maison-biologique-home', get_template_directory_uri() . '/assets/js/home.js', array(), '20151215', true );
 
-	if( is_front_page() ):
+	wp_register_script('fondu', get_template_directory_uri() . '/assets/js/fondu.js', array(), '20151215', true );
+
+	if( is_front_page()):
 		wp_enqueue_script('maison-biologique-home');
+	endif;
+
+	if( is_category() || is_front_page()):
+		wp_enqueue_script('fondu');
 	endif;
 
 	wp_register_script('maison-biologique-single', get_template_directory_uri() . '/assets/js/single.js', array(), '20151215', true );
@@ -154,6 +160,7 @@ function maison_biologique_scripts() {
 	if( is_single() ):
 		wp_enqueue_script('maison-biologique-single');
 	endif;
+
 
 	if( is_page('magasins') ):
 		wp_enqueue_script( 'google-map', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAH1OZAzr0uHVAKxj270Gg3HnPQrK4yOV8', array(), '3', true );
@@ -192,6 +199,8 @@ require get_template_directory() . '/inc/customizer.php';
 
 
 
+
+
 /**
  * Load Jetpack compatibility file.
  */
@@ -201,7 +210,6 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 
 // CUSTOM POST TYPE
-
 function cptui_register_my_cpts() {
 
 	/**
@@ -225,7 +233,7 @@ function cptui_register_my_cpts() {
 		"set_featured_image" => __( "Régler l'image à la une", "maison-biologique" ),
 		"remove_featured_image" => __( "Supprimer l'image à la une", "maison-biologique" ),
 		"use_featured_image" => __( "Utiliser l'image à la une", "maison-biologique" ),
-		"archives" => __( "2vènements", "maison-biologique" ),
+		"archives" => __( "Evènements", "maison-biologique" ),
 		"items_list" => __( "Liste des évènements", "maison-biologique" ),
 		"attributes" => __( "Attributs", "maison-biologique" ),
 	);
@@ -237,8 +245,10 @@ function cptui_register_my_cpts() {
 		"public" => true,
 		"publicly_queryable" => true,
 		"show_ui" => true,
-		"show_in_rest" => false,
+		"delete_with_user" => false,
+		"show_in_rest" => true,
 		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
 		"has_archive" => true,
 		"show_in_menu" => true,
 		"show_in_nav_menus" => true,
@@ -246,16 +256,21 @@ function cptui_register_my_cpts() {
 		"capability_type" => "post",
 		"map_meta_cap" => true,
 		"hierarchical" => false,
-		"rewrite" => array( "slug" => "evenements", "with_front" => true ),
+		"rewrite" => true,
 		"query_var" => true,
-		"menu_icon" => "http://localhost/maison-bio/wp-content/uploads/2018/08/calendar-icon-1.png",
-		"supports" => array( "title", "editor", "thumbnail", "custom-fields" )
+		"menu_icon" => "https://maison-biologique.fr/wp-content/uploads/2018/08/calendar-icon-1.png",
+		"supports" => array( "title", "editor", "thumbnail", "custom-fields" ),
 	);
 
 	register_post_type( "evenements", $args );
+	flush_rewrite_rules();
 }
 
-add_action( 'init', 'cptui_register_my_cpts' );
+add_action( 'init', 'cptui_register_my_cpts', 1 );
+
+
+
+
 
 /* Retirer les préfixes sur les pages d'archives */
 function wpc_remove_archive_title_prefix() {
@@ -340,20 +355,32 @@ return $mails;
 function cf7_add_post_id(){
 
 	global $post;
-	return get_the_date('l j F Y');
+	return date_i18n('l j F Y');
 }
 
-add_shortcode('CF7_ADD_POST_ID', 'cf7_add_post_id');
+add_shortcode('CF7_get_custom_field', 'cf7_add_post_id');
+
+
 
 
 // REDIRIGER APRES FORMULAIRE DE CONTACT
 function add_this_script_footer(){ ?>
 	<script>
+// if (document.body.clientWidth >768){
 		document.addEventListener( 'wpcf7mailsent', function( event ) {
 			setTimeout(function(){
-				location = history.go(-1);
-			}, 1000);
+				 var nav = window.navigator;
+            if( this.phonegapNavigationEnabled &&
+                nav &&
+                nav.app &&
+                nav.app.backHistory ){
+                nav.app.backHistory();
+            } else {
+                window.history.back();
+            }
+			}, 2000);
 		}, false );
+	// }
 	</script>
 	<?php }
 	add_action('wp_footer', 'add_this_script_footer');
@@ -407,7 +434,7 @@ function add_this_script_footer(){ ?>
 	function my_analytics() {
 		?>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-85103120-2"></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126639402-1"></script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
@@ -420,3 +447,22 @@ function add_this_script_footer(){ ?>
 		<?php
 	}
 
+
+
+function insert_opengraph_in_head() {
+
+    global $post;
+    if ( !is_singular()) // On vérifie si nous somme dans un article ou une page
+	return;
+
+    echo '<meta property="og:title" content="' . get_the_title() . '"/>';
+    echo '<meta property="og:type" content="article"/>';
+    echo '<meta property="og:url" content="' . get_permalink() . '"/>';
+    echo '<meta property="og:description" content="' .strip_tags(get_the_excerpt()) . '" />';
+    echo '<meta property="og:site_name" content="Maison Biologique"/>';
+
+    $thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ) );
+    echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '"/>';
+    echo '<link rel="image_src" href="'. esc_attr( $thumbnail_src[0] ) . '" />';
+}
+add_action( 'wp_head', 'insert_opengraph_in_head', 5 );

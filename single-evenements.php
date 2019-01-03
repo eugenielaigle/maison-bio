@@ -21,7 +21,7 @@
           <?php echo $event_title['titre_ligne_2']['lettres_en_majuscules']; ?>
         </h4>
       <?php endif; ?>
-    <p class="article-date"><?php  echo get_the_date('l j F');?></p>
+    <p class="article-date"><?php the_field('event_date');?></p>
     <p class="entry-date"><?php the_field('lieu'); ?> / <?php the_field('horaires'); ?></p>
    </header>
     <!-- FORMULAIRE DE RESERVATION -->

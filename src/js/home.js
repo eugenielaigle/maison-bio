@@ -55,9 +55,10 @@ $(document).on('scroll', function() {
   $(document).on('scroll', function() {
    if($(window).scrollTop() > 200){
     // $('#site-navigation').removeClass('main-navigation');
-    $('#site-navigation').removeClass('top-navigation');
+
     $('#site-navigation').addClass('article-navigation');
     $('#site-navigation').addClass('home-fixe-navigation');
+    $('#site-navigation').removeClass('top-navigation');
     $('.menu-toggle img').css("display","block");
     // $('.menu-toggle p').css("display","none");
      $('.menu-menu-home-principal-container').css("display","none");
@@ -86,7 +87,7 @@ $(document).on('scroll', function() {
 // }
 
 
-});
+
 
 
 
@@ -130,3 +131,6 @@ $(document).on('scroll', function() {
 // window.onresize = HorsSujet;
 // HorsSujet(); //On appelle une première fois le script (obligatoire).
 
+
+
+});

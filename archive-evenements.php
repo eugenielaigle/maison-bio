@@ -10,16 +10,30 @@
 get_header();
 ?>
 
-<?php  $args = array(
-        'post_type' => 'evenements',
-        'posts_per_page' => '-1',
-        'post_status' => 'future',
-        'order' => 'asc'
-      );
+
+<?php
+$today = date( 'Y-m-d' );
+ $args = array(
+  'post_type' => 'evenements',
+  'posts_per_page' => '-1',
+  'post_status' => 'publish',
+  'meta_key' => 'event_date',
+  'orderby' => 'meta_value_num',
+  'order' => 'asc',
+  'meta_query' => array(
+    array(
+      'key' => 'event_date',
+      'value'   => $today,
+      'compare' => '>=',
+      'type'    => 'DATE'
+
+    )
+  )
+);
 $query = new WP_Query($args);?>
 
-  <div id="primary" class="content-area">
-    <main id="main" class="site-main">
+<div id="primary" class="content-area">
+  <main id="main" class="site-main">
 
     <?php if ( $query->have_posts() ) : ?>
 
@@ -33,7 +47,7 @@ $query = new WP_Query($args);?>
       <?php
       /* Start the Loop */
       while (  $query->have_posts() ) :
-         $query->the_post();
+       $query->the_post();
 
         /*
          * Include the Post-Type-specific template for the content.
@@ -53,8 +67,8 @@ $query = new WP_Query($args);?>
     endif;
     ?>
 
-    </main><!-- #main -->
-  </div><!-- #primary -->
+  </main><!-- #main -->
+</div><!-- #primary -->
 
 <?php
 // get_sidebar();

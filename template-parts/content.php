@@ -33,11 +33,11 @@
 				<div class="infos-article">
 					<div class="category-date">
 					<h3 class="entry-category"><?php the_category(); ?></h3>
-					<p class="article-date"><?php  echo get_the_date();?></p>
+					<p class="article-date"><?php  echo get_the_date('j M. Y');?></p>
 					</div>
 					<div class="bloc-title">
 					<h2 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php  the_title();?></a></h2>
-					<p class="entry-date"><?php  echo get_the_date();?> par <?php the_field('author'); ?></p>
+					<p class="entry-date"><?php  echo get_the_date('j M. Y');?> par <?php the_field('author'); ?></p>
 					</div>
 					<div class="entry-excerpt-une"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php echo wpse_custom_excerpts(30); ?></a></div>
 					<div class="entry-excerpt"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php echo wpse_custom_excerpts(15); ?></a></div>

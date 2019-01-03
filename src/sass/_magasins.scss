@@ -49,18 +49,38 @@
     margin-bottom: 10vh;
   }
 }
-.magasin-1, .magasin-3, .magasin-4, .magasin-5{
+.magasin-1{
   width: 100%;
   display: flex;
   margin-bottom: 10vh;
   .magasin{
     width: 30%;
-    border-right: 0.5px solid $line;
+    border-right: 0.25px solid $line;
   }
   @media (min-width: 769px){
    .photo-magasin{
     margin-left: 30px;
   }
+}
+
+}
+
+.magasin-2{
+  width: 100%;
+  display: flex;
+  margin-bottom: 10vh;
+  .magasin{
+    width: 30%;
+    border-left: 0.25px solid $line;
+  }
+  @media (min-width: 769px){
+   .photo-magasin{
+    margin-right: 30px;
+  }
+  .magasin{
+    padding-left: 30px;
+  }
+
 }
 
 }
@@ -111,7 +131,7 @@
 }
 
 .acf-map {
-  border: #ccc solid 1px;
+  border: #ccc solid 0.25px;
   margin-bottom: 10vh;
   /* fixes potential theme css conflict */
   .acf-map img {
@@ -125,34 +145,34 @@
 @media (min-width: 769px){
   .acf-map{
     height: 700px;
-    width: 65%;
+    width: 100%;
   }
-  .magasin-2{
-    width: 30%;
-    height: 230vh;
-    .magasin{
-      height: 700px;
-      margin-left: 30px;
-      padding-left: 30px;
-      border-left: 0.5px solid $line;
-    }
-    .photo-magasin{
-      position: absolute;
-      width: 100%;
-      left: 0;
-      margin-top: 10vh;
-      display: flex;
-      justify-content: flex-end;
-    }
-  }
+  // .magasin-2{
+  //   width: 30%;
+  //   height: 230vh;
+  //   .magasin{
+  //     height: 700px;
+  //     margin-left: 30px;
+  //     padding-left: 30px;
+  //     border-left: 0.25px solid $line;
+  //   }
+  //   .photo-magasin{
+  //     position: absolute;
+  //     width: 100%;
+  //     left: 0;
+  //     margin-top: 10vh;
+  //     display: flex;
+  //     justify-content: flex-end;
+  //   }
+  // }
 
 }
 
 @media (min-width: 1800px){
   .site-main{
-      .magasin-2{
-        height: 150vh;
-  }
+  //     .magasin-2{
+  //       height: 150vh;
+  // }
   }
 
 }

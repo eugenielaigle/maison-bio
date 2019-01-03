@@ -27,7 +27,7 @@
           <div class="textes-gauche">
             <div class="article-content">
               <p class="chapeau-article"><?php the_sub_field('chapeau'); ?></p>
-              <?php the_sub_field('content_1'); ?>
+                <?php the_sub_field('content_1'); ?>
               <p class="citation-article xs-invisible"><?php the_sub_field('citation'); ?></p>
               <div class="xs-invisible">
                 <?php the_sub_field('content_2'); ?>
@@ -67,8 +67,11 @@
                 <?php
                 $lien = get_permalink();
                 $titre = strip_tags(get_the_title());
+                $thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ) );
+                $image = esc_attr( $thumbnail_src[0] );
                 $facebook_link  = 'https://www.facebook.com/sharer/sharer.php?u='.$lien;
                 $twitter_link  = 'http://www.linkedin.com/shareArticle?mini=true&url=' . $lien . '&title=' . $titre;
+                $mail_link = 'mailto:?subject=' . $titre . '&body=Je viens de découvrir cet article qui pourrait vous intéresser : ' . $titre . ' %0D%0A Pour le découvrir, cliquez sur ce lien : ' . $lien;
                 ?>
                 <p class="partagez">PARTAGER:</p>
                 <a class="partage-facebook" href="<?php echo $facebook_link;?>" target="_blank">FACEBOOK</a>
@@ -198,10 +201,13 @@
                 <div class="image-carree">
                   <?php the_post_thumbnail(); ?>
                 </div>
+                </a>
                 <h4 class="entry-category"><?php the_category(); ?></h4>
+                <a href="<?php the_permalink(); ?>">
                 <h3 class="article-title"><?php the_title(); ?></h3>
+                </a>
                 <div class="entry-excerpt"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php echo wpse_custom_excerpts(30); ?></a></div>
-              </a>
+
             </div>
           <?php endforeach; ?>
         </div> <!-- end articles-inspirants -->

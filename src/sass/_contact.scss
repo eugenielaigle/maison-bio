@@ -6,24 +6,33 @@ html{
   position: relative;
   #close-recherche{
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 25px;
+    right: 25px;
     font-weight: 300;
-    color: #000;
-    font-size: 25px;
+    color: $greyy;
+    font-size: 35px;
     transform: rotate(45deg);
   }
 }
 
-.page-template-contact{
-  background-color: #fff!important;
-}
+// .page-template-contact{
+//   background-color: #fff!important;
+// }
 
 .contact-main{
+  @media (min-width: 769px){
+    margin-top: 15vh!important;
+  }
+  @media(max-width: 768px){
+    margin-top: 0!important;
+  }
   .entry-title{
     margin-bottom: 10vh;
     font-size: 35px!important;
     line-height: 44px!important;
+    @media(max-width: 768px){
+      margin-bottom: 3vh;
+    }
   }
   .wpcf7{
     display: flex;
@@ -31,7 +40,10 @@ html{
 
     .wpcf7-form{
       @media (min-width: 769px){
-        width: 45%;
+        width: 35%;
+      }
+      @media (max-width: 768px){
+        margin-bottom: 10vh;
       }
 
       p label{
@@ -55,6 +67,18 @@ html{
         font-size: 14px;
         font-weight: 400;
         border-radius: 0!important;
+        background-color: $global;
+        outline: none;
+        box-shadow: none!important;
+        outline-offset: none!important;
+      }
+
+      // Sortir l'ombre sur les input sur IOS
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      textarea {
+        -webkit-appearance: none;
       }
       textarea{
         line-height: 16px;
@@ -72,6 +96,7 @@ html{
         }
         .wpcf7-list-item-label{
           margin-left: 5px;
+          color: #626262;
         }
       }
       span.wpcf7-not-valid-tip{
@@ -79,6 +104,10 @@ html{
         right: -135px;
         top: 0;
         text-transform: initial;
+        @media (max-width: 768px){
+          right: 0;
+          top: 25px;
+        }
       }
       .final{
         display: flex;
@@ -87,7 +116,7 @@ html{
         input[type="submit"]{
           border: none;
           background: none;
-          font-size: 12px;
+          font-size: 14px;
           font-weight: 700;
           text-transform: uppercase;
           padding: 0;
@@ -103,6 +132,7 @@ html{
         font-size: 16px;
         font-style: italic;
         line-height: 18px;
+        background-color: $global;
       }
     }
   }
@@ -112,6 +142,13 @@ html{
 div.wpcf7-validation-errors, div.wpcf7-acceptance-missing, div.wpcf7-mail-sent-ok{
   border: none!important;
 }
+
+
+  div.wpcf7-validation-errors{
+      color: $global!important;
+}
+
+
 
 div.wpcf7-mail-sent-ok{
   height: 95vh;
@@ -123,8 +160,16 @@ div.wpcf7-mail-sent-ok{
   display: flex!important;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  text-align: center;
+  background-color: $global!important;
   padding-bottom: 15vh;
+  padding-left: 40%;
+  padding-right: 40%;
+  @media (max-width: 768px){
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-bottom: 0;
+  }
 }
 
 
@@ -134,17 +179,28 @@ input[type=checkbox] {
   -ms-appearance: none;
 }
 
-input[type=checkbox] {
+.contact-main .wpcf7 input[type=checkbox] {
   -border-radius: 0px;
   height: 12px;
   width: 12px;
-  background: #fff;
-  border: 1px solid #626262;
+  border: 0.5px solid #626262;
+  cursor: pointer;
 }
 
-input[type="checkbox"]:checked {
+.contact-main .wpcf7 input[type="checkbox"]:checked {
   background: #626262;
   margin:0px;
   padding: 1px;
   position: relative;
 }
+
+span.wpcf7-not-valid-tip{
+  color: crimson ;
+  font-style: italic;
+}
+
+@-moz-document url-prefix() {
+  .contact-main .wpcf7 .wpcf7-form .final{
+    margin-top: 5px;
+  }
+  }

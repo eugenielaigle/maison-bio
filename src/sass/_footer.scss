@@ -34,8 +34,8 @@ footer{
       height: 12px;
       position: absolute;
       right: 50%;
-      transition: right 0.2s linear;
-      transition-delay: 0.2s;
+      transition: right 0.2s linear!important;
+      transition-delay: 0.2s!important;
     }
     .reserver .mask {
       position: absolute;
@@ -53,7 +53,7 @@ footer{
 
   .voir-calendrier:hover .fleche{
     right: 0;
-    transition: right 0.2s linear;
+    transition: right 0.2s linear!important;
   }
 }
 
@@ -70,9 +70,9 @@ footer{
 }
 
 .partie-evenements{
-  border-top: 0.5px solid $line;
+  border-top: 0.25px solid $line;
   width: 100%;
-  height: 20vh;
+  height: 21vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,6 +81,7 @@ footer{
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 5px;
+    margin-top: 15px;
   }
   .chapeau{
     font-style: italic;
@@ -96,8 +97,8 @@ footer{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 0.5px solid $line;
-  height: 50px;
+  border-top: 0.25px solid $line;
+  height: 60px;
   .maison-bio{
     font-family: 'Caslon 540';
     font-size: 19px;
@@ -116,13 +117,13 @@ footer{
       font-size: 12px;
       margin: 0 3%;
     }
-    .menu-item-245{
-      margin: 0 3% 0 2px;
-    }
+    // .menu-item-245{
+    //   margin: 0 3% 0 2px;
+    // }
 
-    .menu-item-54{
-      margin: 0 2px 0 3%;
-    }
+    // .menu-item-54{
+    //   margin: 0 2px 0 3%;
+    // }
   }
   .biocoop-footer{
     display: flex;
